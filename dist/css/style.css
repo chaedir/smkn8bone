@@ -1,0 +1,116 @@
+.container2 .slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 500%;
+  height: 100%;
+  animation: animate 23s linear infinite;
+}
+
+.container2 .slider .slide {
+  position: relative;
+  width: 20%;
+  height: 100%;
+  float: left;
+}
+
+.container2 .slider .slide .caption {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  right: 100px;
+  padding: 17px;
+  border-radius: 0 50px 0 0;
+  background: rgba(31, 112, 204, 0.4);
+  box-sizing: border-box;
+  transition: 0.5s;
+}
+
+.container2 .slider .slide .caption .hslide {
+  margin: 0 0 18px;
+  padding: 0;
+  color: #fff;
+  font-size: 2rem;
+  transition: 0.5s;
+}
+
+.container2 .slider .slide .caption .pslide {
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  font-size: 1rem;
+  transition: 0.5s;
+}
+
+.container2 .slider .slide.slide1 {
+  background-image: url(/dist/img/projects/project1.jpeg);
+  background-size: cover;
+  background-position: center;
+}
+
+.container2 .slider .slide.slide2 {
+  background-image: url(/dist/img/projects/project2.jpeg);
+  background-size: cover;
+  background-position: center;
+}
+
+.container2 .slider .slide.slide3 {
+  background-image: url(/dist/img/projects/project3.jpeg);
+  background-size: cover;
+  background-position: center;
+}
+
+.container2 .slider .slide.slide4 {
+  background-image: url(/dist/img/projects/project4.jpeg);
+  background-size: cover;
+  background-position: center;
+}
+
+@keyframes animate {
+  0% {
+    left: 0;
+  }
+  20% {
+    left: 0;
+  }
+  25% {
+    left: -100%;
+  }
+  45% {
+    left: -100%;
+  }
+  50% {
+    left: -200%;
+  }
+  70% {
+    left: -200%;
+  }
+  75% {
+    left: -300%;
+  }
+  95% {
+    left: -300%;
+  }
+  100% {
+    left: -400%;
+  }
+}
+
+/* @media (max-width: 768px) {
+  .container .slider .slide .caption {
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    padding: 20px;
+  }
+
+  .container .slider .slide .caption h2 {
+    margin: 0 0 10px;
+    font-size: 30px;
+  }
+
+  .container .slider .slide .caption p {
+    font-size: 16px;
+  }
+} */

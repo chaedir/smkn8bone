@@ -1,0 +1,109 @@
+$primary-color: #fff;
+$secondary-color: #1f70cc;
+$show-home-image: true;
+$home-image: url(../img/background.png);
+$background-opacity: 0.4;
+
+@mixin ease0ut {
+  transition: all 0.5s ease-out;
+}
+
+@mixin background {
+  @if $show-home-image {
+    &#bg-img {
+      background: $home-image;
+      background-attachment: fixed;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+
+      &:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 100%;
+        width: 100%;
+        z-index: -1;
+        display: block;
+        background: rgba($primary-color, $background-opacity);
+        background-size: cover;
+      }
+    }
+  }
+}
+
+@mixin background2 {
+  @if $show-home-image {
+    &#bg-img {
+      background: $home-image;
+      background-attachment: fixed;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+
+      &:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 200%;
+        width: 100%;
+        z-index: -1;
+        display: block;
+        background: rgba($primary-color, $background-opacity);
+        background-size: cover;
+      }
+    }
+  }
+}
+
+// Set Text Color
+@function set-text-color($color) {
+  @if (lightness($color) > 40) {
+    @return #000;
+  } @else {
+    @return #fff;
+  }
+}
+
+// Media Query Mixins
+@mixin mediaSm {
+  @media screen and (max-width: 500px) {
+    @content;
+  }
+}
+
+@mixin mediaMd {
+  @media screen and (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin mediaLg {
+  @media screen and (min-width: 769px) and (max-width: 1170px) {
+    @content;
+  }
+}
+
+@mixin mediaXl {
+  @media screen and (min-width: 1171px) {
+    @content;
+  }
+}
+
+@mixin mediaHeight {
+  @media screen and (max-height: 580px) {
+    @content;
+  }
+}
+
+@mixin mediaHeight-Menu {
+  @media screen and (max-height: 650px) {
+    @content;
+  }
+}

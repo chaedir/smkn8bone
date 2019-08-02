@@ -1,0 +1,316 @@
+#head-background1 {
+  height: 10px;
+  background: #27aae1;
+}
+
+#head-background2 {
+  height: 10px;
+  background: #27aae1;
+  margin-top: -2rem;
+}
+
+#logo {
+  width: 5.4rem;
+  margin-top: -17px;
+}
+
+.navbar-nav li {
+  font-weight: bold;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  font-size: 1.2em;
+}
+
+#main-footer {
+  text-align: center;
+  padding: 1rem;
+  font-size: 1rem;
+  background: #211f22;
+  color: #eee;
+  height: 60px;
+}
+
+.blogpost {
+  background-color: #f5f5f5;
+  padding: 10px;
+  overflow: hidden;
+}
+
+#mainHeading {
+  font-weight: bold;
+  color: #005e90;
+  margin-top: -8px;
+  margin: none;
+}
+
+#mainHeadingFullPost {
+  font-weight: bold;
+  color: #1f70cc;
+  margin-top: 2rem;
+}
+
+#sideHeading {
+  font-weight: normal;
+  color: #211f22;
+  margin-top: -3px;
+  margin: none;
+}
+
+#sideHeading:hover {
+  color: #0090db;
+}
+
+.description {
+  color: #868686;
+  font-weight: lighter;
+  margin: none;
+  padding: none;
+  border: none;
+  margin-top: 0px;
+}
+
+.post {
+  font-size: 14px;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+
+  text-align: justify;
+}
+
+.btn-info {
+  float: left;
+  font-size: 11px;
+  background: #1f70cc;
+  color: #ffffff;
+  margin-top: 1.7em;
+  border-radius: 4px;
+  padding-right: 8px;
+  padding-left: 8px;
+}
+
+.btn-info:hover {
+  background: #4180c9;
+  color: #ffffff;
+}
+
+.page {
+  text-align: center;
+}
+
+.pagination {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+  border: 1px solid #ddd;
+  margin: 0 4px;
+}
+
+.active {
+  background-color: #1f70cc;
+  color: white;
+  border: 1px solid #1f70cc;
+}
+
+.pagination:hover:not(.active) {
+  background-color: #ddd;
+}
+
+.fieldInfo {
+  color: #1f70cc;
+  font-weight: bold;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+
+/* SIDE AREA */
+
+.panel {
+  border: #e0dfdf solid 1px;
+}
+
+.panelHeading {
+  background: #1f70cc;
+}
+
+.panelHeading2 {
+  margin-bottom: -8px;
+  padding-bottom: 5px;
+}
+
+.panelTitle {
+  padding: 10px 0 10px 15px;
+  font-weight: bold;
+  font-size: 15px;
+  color: #ffffff;
+}
+
+.panelBody {
+  padding: 10px 0 10px 15px;
+  font-weight: lighter;
+  font-size: 14px;
+}
+
+.panelBody2 {
+  font-weight: lighter;
+  font-size: 14px;
+}
+
+.img-thumbnail-rcPost {
+  width: 75px;
+  height: 65px;
+  /* border-radius: 8px; */
+}
+
+hr {
+  border-top: 0.05px solid #e0dfdf;
+}
+
+/* END OF SIDE AREA */
+/* 
+
+
+*/
+/* INPUT COMMENT AREA */
+
+#codeName,
+input[type="email"],
+textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+input[type="submit"] {
+  background-color: #4caf50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+}
+
+input[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+.insertComment {
+  box-sizing: border-box;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+.col-25 {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+}
+
+.col-75 {
+  float: left;
+  width: 75%;
+  margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.form-group:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .col-25,
+  .col-75,
+  input[type="submit"] {
+    width: 100%;
+    margin-top: 0;
+  }
+}
+/* END OF INPUT COMMENT AREA */
+
+/* fullPost.php */
+.pull-left {
+  margin: 10px 10px 0 10px;
+}
+
+.background {
+  background-color: #f6f7f9;
+}
+
+.commentBlock {
+  background-color: #f6f7f9;
+}
+
+.commentInfo {
+  color: #365899;
+  font-family: sans-serif;
+  font-size: 1.1em;
+  font-weight: bold;
+  padding-top: 10px;
+}
+
+.commentS {
+  margin-top: -2px;
+  padding-bottom: 10px;
+  font-size: 1.1em;
+}
+
+.imageIcon {
+  max-width: 200px;
+  margin: 0 auto;
+  display: block;
+}
+
+input[type="text"] {
+  padding: 4px;
+  height: 30px;
+  width: 200px;
+}
+
+.btnDefault {
+  height: 30px;
+  background: #1f70cc;
+  border: #1f70cc solid 1px;
+  padding-left: 20px;
+  padding-right: 20px;
+  color: #ffffff;
+}
+
+.btnDefault:hover {
+  background: #4180c9;
+  color: #ffffff;
+}
+
+.totalComments {
+  padding: 2px 5px 2px 5px;
+  background: #868686;
+  color: #ffffff;
+  border-radius: 7px;
+  font-size: 10px;
+}
+
+/* Alert Message */
+.alert-danger {
+  background: red;
+  padding: 3px 1em;
+  color: white;
+  font-weight: bold;
+}
+
+.alert-success {
+  background: #4caf50;
+  padding: 3px 1em;
+  color: white;
+  font-weight: bold;
+}

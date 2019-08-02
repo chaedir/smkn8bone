@@ -1,0 +1,134 @@
+// Widescreens
+@include mediaXl {
+  .projects {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+// Desktops & Laptops
+@include mediaLg {
+  .projects {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+// Tablets & Small Laptops
+@include mediaMd {
+  main {
+    align-items: center;
+    text-align: center;
+
+    .lg-heading {
+      line-height: 1;
+      margin-bottom: 1rem;
+      font-size: 4.5rem;
+    }
+  }
+
+  ul.menu2-nav2,
+  div.menu2-branding2 {
+    float: none;
+    width: 100%;
+    min-height: 0;
+
+    &.show {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  .menu2-nav2 {
+    height: 70vh;
+    transform: translate3d(-100%, 0, 0);
+    font-size: 24px;
+  }
+
+  .menu2-branding2 {
+    height: 30vh;
+    transform: translate3d(100%, 0, 0);
+
+    .portrait2 {
+      background: url(../img/portrait_small.jpeg);
+      background-position: center;
+      width: 150px;
+      height: 150px;
+    }
+  }
+
+  .about-info {
+    grid-template-areas:
+      "bioimage"
+      "bio"
+      "job1"
+      "job2"
+      "job3";
+
+    grid-template-columns: 1fr;
+  }
+
+  .projects {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+// Smartphones
+@include mediaSm {
+  body {
+    @include background2;
+  }
+
+  main#home h1 {
+    margin-top: 10vh;
+  }
+
+  .projects {
+    grid-template-columns: 1fr;
+  }
+
+  .sm-heading {
+    // margin-bottom: 0.5rem;
+    // padding: 0.2rem 1rem;
+    // font-size: 1.2rem;
+    display: none;
+  }
+}
+
+// Small Height
+@include mediaHeight {
+  body {
+    @include background2;
+  }
+
+  main {
+    align-items: center;
+    text-align: center;
+
+    .lg-heading {
+      line-height: 1;
+      margin-bottom: 2rem;
+      font-size: 3rem;
+    }
+
+    .sm-heading {
+      // margin-bottom: 0.5rem;
+      // padding: 0.2rem 1rem;
+      // font-size: 1.2rem;
+      display: none;
+    }
+
+    /*.icons {
+      font-size: 13px;
+    }*/
+  }
+}
+
+//Menu
+@include mediaHeight-Menu {
+  .nav2-item2 {
+    &.show {
+      .nav2-link2 {
+        font-size: 20px;
+        padding: 0.5rem 0;
+      }
+    }
+  }
+}

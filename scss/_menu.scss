@@ -1,0 +1,134 @@
+//Menu Button
+.menu2-btn2 {
+  position: absolute;
+  z-index: 3;
+  right: 35px;
+  top: 35px;
+  cursor: pointer;
+  @include ease0ut;
+
+  .btn2-line2 {
+    width: 28px;
+    height: 3px;
+    margin: 0 0 5px 0;
+    background: set-text-color($primary-color);
+    @include ease0ut;
+  }
+
+  // Rotate into X With Menu Lines
+  &.close {
+    transform: rotate(180deg);
+
+    .btn2-line2 {
+      //Line 1 - Rotate
+      &:nth-child(1) {
+        //background: red;
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+      //Line 2 - Hide
+      &:nth-child(2) {
+        opacity: 0;
+      }
+      //Line 3 - Rotate
+      &:nth-child(3) {
+        //background: red;
+        transform: rotate(-45deg) translate(7px, -6px);
+      }
+    }
+  }
+}
+
+// Menu Overlay
+.menu2 {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  opacity: 0.9;
+  visibility: hidden;
+
+  &.show {
+    visibility: visible;
+  }
+
+  &-branding2,
+  &-nav2 {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    justify-content: center;
+    float: left;
+    width: 50%;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  &-nav2 {
+    margin: 0;
+    padding: 0;
+    background: darken($primary-color, 5);
+    list-style: none;
+    transform: translate3d(0, -100%, 0);
+    @include ease0ut;
+
+    &.show {
+      // Slide in from top
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  &-branding2 {
+    background: $primary-color;
+    transform: translate3d(0, 100%, 0);
+    @include ease0ut;
+
+    &.show {
+      // Slide in from bottom
+      transform: translate3d(0, 0, 0);
+    }
+
+    .portrait2 {
+      width: 250px;
+      height: 250px;
+      background: url("../img/portrait.jpeg");
+      background-position: center;
+      border-radius: 20%;
+      border: solid 3px $secondary-color;
+    }
+  }
+
+  .nav2-item2 {
+    transform: translate3d(600px, 0, 0);
+    @include ease0ut;
+
+    &.show {
+      transform: translate3d(0, 0, 0);
+    }
+
+    &.current > a {
+      color: $secondary-color;
+    }
+
+    .nav2-link2 {
+      display: inline-block;
+      position: relative;
+      font-size: 30px;
+      text-transform: uppercase;
+      font-weight: 300;
+      padding: 1rem 0;
+      color: set-text-color($primary-color);
+      text-decoration: none;
+      @include ease0ut;
+
+      &:hover {
+        color: $secondary-color;
+      }
+    }
+  }
+}
+
+// Delay each nav item slide by 0.1s
+@for $x from 1 through 6 {
+  .nav2-item2:nth-child(#{$x}) {
+    transition-delay: $x * 0.1s;
+  }
+}
