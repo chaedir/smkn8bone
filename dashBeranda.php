@@ -2,6 +2,41 @@
 <?php require_once("include/functions.php"); ?>
 <?php require_once("include/db.php"); ?>
 <?php Confirm_Login(); ?>
+<!-- SUBMIT BUTTON configuration -->
+<?php
+if (isset($_POST["Submit"])) {
+    $Title = mysqli_real_escape_string($Connection, $_POST["Title"]);
+    //$Post = mysqli_real_escape_string($Connection, $_POST["Post"]);
+    date_default_timezone_set("Asia/Makassar");
+    $CurrentTime = time();
+    //$DateTime = strftime("%Y-%m-%d %H:%M:%S", $CurrentTime);
+    $DateTime = strftime("%A %H:%M - %d %B %Y", $CurrentTime);
+    $DateTime;
+    $Admin = $_SESSION["Username"];
+    $name = $_FILES["Image"]["name"];
+    $target_dir = "slideshows/";
+    $target_file =  $target_dir . basename($_FILES["Image"]["name"]);
+    if (empty($Title)) {
+        $_SESSION["ErrorMessage"] = "Title can't be empty";
+        Redirect_to("dashBeranda.php");
+    } elseif (strlen($Title) < 2) {
+        $_SESSION["ErrorMessage"] = "Title should be at-least 2 character";
+        Redirect_to("dashBeranda.php");
+    } else {
+        //global $Connection;        
+        $Query = mysqli_query($Connection, "INSERT INTO slideshow (datetime,image,title,author) VALUES('" . $DateTime . "','" . $name . "','" . $Title . "','" . $Admin . "')");
+        move_uploaded_file($_FILES['Image']['tmp_name'], $target_file);
+        if ($Query) {
+            $_SESSION["SuccessMessage"] = "Sukses menambahkan slideshow !";
+            Redirect_to("dashBeranda.php");
+        } else {
+            $_SESSION["ErrorMessage"] = "Something went wrong, try again !";
+            Redirect_to("dashBeranda.php");
+        }
+    }
+}
+?>
+<!-- end of SUBMIT BUTTON configuration -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,6 +59,7 @@
 </head>
 
 <body>
+    <!-- NAVBAR area -->
     <div id="head-background1">
     </div>
     <nav class="navbar navbar-inverse" role="navigation">
@@ -41,7 +77,7 @@
             </div>
             <div class="collapse navbar-collapse" id="collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="index.php" target="_blank">Home</a></li>
+                    <li><a href="#">Home</a></li>
                     <li class="active"><a href="backup.php?Page=1" target="_blank">Blog</a></li>
                     <li><a href="#">About Us</a></li>
                     <li><a href="#">Services</a></li>
@@ -59,12 +95,13 @@
     </nav>
     <div id="head-background2">
     </div>
+    <!-- end of NAVBAR area -->
 
-
+    <!-- CONTAINER area -->
     <div class="container-fluid">
         <div class="row">
+            <!--SIDE Area-->
             <div class="col-sm-2">
-                <!--Side Area-->
                 <br>
                 <ul id="side_menu" class="nav nav-pills nav-stacked">
                     <li class="active"><a href="dashboard.php"> <span class="glyphicon glyphicon-th"></span>
@@ -97,40 +134,62 @@
                             &nbsp;Logout</a></li>
                 </ul>
             </div>
-            <!--Ending of Side Area-->
+            <!--End of SIDE Area-->
+
+            <!--MAIN Area-->
             <div class="col-sm-10">
-                <!--Main Area-->
+                <!-- MESSAGE area -->
                 <div>
                     <?php echo Message();
                     echo SuccessMessage();
                     ?>
                 </div>
-                <h1>Admin Dashboard</h1>
+                <!-- End of MESSAGE area -->
+                <h1>Dashboard Beranda</h1>
+                <!-- ADD NEW SLIDE area -->
+                <div>
+                    <form action="dashBeranda.php" method="post" enctype="multipart/form-data">
+                        <fieldset>
+                            <div class="form-group">
+                                <label for="title"><span class="Fieldinfo">Title:</span></label>
+                                <input class="form-control" type="text" name="Title" id="title" placeholder="Title">
+                                <br>
+                            </div>
+                            <div class="form-group">
+                                <label for="imageselect"><span class="Fieldinfo">Select Image:</span></label>
+                                <input type="File" class="form-control" name="Image" id="imageselect">
+                                <br>
+                            </div>
+
+                            <input class="btn btn-success btn-block" type="submit" name="Submit" value="Add New Slide">
+                        </fieldset>
+                        <br>
+                    </form>
+                </div>
+                <!-- end of ADD NEW SLIDE area -->
+
+                <!-- SLIDESHOW Area -->
                 <div class="table-responsive">
                     <table class="table table-striped table-hover">
                         <tr>
                             <th>No</th>
-                            <th>Post Title</th>
+                            <th>Slide Title</th>
                             <th>Date & Time</th>
                             <th>Author</th>
-                            <th>Category</th>
                             <th>Banner</th>
-                            <th>Comments</th>
                             <th>Action</th>
                             <th>Details</th>
                         </tr>
 
                         <?php
-                        $viewQuery = $Connection->query("SELECT * FROM admin_panel ORDER BY id desc");
+                        $viewQuery = $Connection->query("SELECT * FROM slideshow ORDER BY id desc");
                         $SrNo = 0;
                         while ($fetchData = mysqli_fetch_array($viewQuery)) {
                             $Id = $fetchData["id"];
                             $DateTime = $fetchData["datetime"];
-                            $Title = $fetchData["title"];
-                            $Category = $fetchData["category_name"];
-                            $Admin = $fetchData["author"];
                             $Image = $fetchData["image"];
-                            $Post = $fetchData["post"];
+                            $Title = $fetchData["title"];
+                            $Admin = $fetchData["author"];
                             $SrNo++;
 
                             ?>
@@ -153,62 +212,29 @@
                                     echo $Admin;
                                     ?>
                                 </td>
+                                <td><img src="slideshows/<?php echo $Image; ?>" width="170" ; height="50px"></td>
                                 <td>
-                                    <?php
-                                    if (strlen($Category) > 40) {
-                                        $Category = substr($Category, 0, 40) . '...';
-                                    }
-                                    echo $Category;
-                                    ?></td>
-                                <td><img src="assets/<?php echo $Image; ?>" width="170" ; height="50px"></td>
-                                <td>
-                                    <?php
-                                    $queryApproved = $Connection->query("SELECT COUNT(*) FROM comments WHERE admin_panel_id='$Id' AND status='ON'");
-                                    $rowsApproved = mysqli_fetch_array($queryApproved);
-                                    $totalApproved = array_shift($rowsApproved);
-
-                                    if ($totalApproved > 0) {
-                                        ?>
-                                        <span class="label pull-right label-success">
-                                            <?php echo $totalApproved; ?>
-                                        </span>
-                                    <?php } ?>
-
-                                    <?php
-                                    $queryUnApproved = $Connection->query("SELECT COUNT(*) FROM comments WHERE admin_panel_id='$Id' AND status='OFF'");
-                                    $rowsUnApproved = mysqli_fetch_array($queryUnApproved);
-                                    $totalUnApproved = array_shift($rowsUnApproved);
-
-                                    if ($totalUnApproved > 0) {
-                                        ?>
-                                        <span class="label pull-left label-warning">
-                                            <?php echo $totalUnApproved; ?>
-                                        </span>
-                                    <?php } ?>
-
-                                </td>
-                                <td>
-                                    <a href="editPost.php?edit=<?php echo $Id; ?>">
+                                    <a href="editBeranda.php?edit=<?php echo $Id; ?>">
                                         <span class="btn btn-warning" style="margin: 2px 0;">Edit</span></a>
 
-                                    <a href="deletePost.php?delete=<?php echo $Id; ?>">
+                                    <a href="deleteBeranda.php?delete=<?php echo $Id; ?>">
                                         <span class="btn btn-danger" style="margin: 2px 0;">Delete</span></a>
                                 </td>
                                 <td>
-                                    <a href="fullPost.php?id=<?php echo $Id; ?>" target="_blank">
+                                    <a href="index.php?id=<?php echo $Id; ?>" target="_blank">
                                         <span class="btn btn-primary" style="margin: 2px 0;">Live Preview</span></a>
                                 </td>
                                 <!-- <td><?php echo $Post; ?></td> -->
                             </tr>
                         <?php } ?>
-
-
                     </table>
                 </div>
+                <!--End of SLIDESHOW Area-->
             </div>
-            <!--Ending of Main Area-->
+            <!--End of MAIN Area-->
         </div>
     </div>
+    <!-- end of CONTAINER area -->
 
     <footer id="main-footer">
         Copyright &copy; 2019 SMKN 8 Bone

@@ -41,7 +41,7 @@
             </div>
             <div class="collapse navbar-collapse" id="collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="index.php" target="_blank">Home</a></li>
+                    <li><a href="#">Home</a></li>
                     <li class="active"><a href="backup.php?Page=1" target="_blank">Blog</a></li>
                     <li><a href="#">About Us</a></li>
                     <li><a href="#">Services</a></li>
