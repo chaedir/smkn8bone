@@ -17,10 +17,13 @@ if (isset($_POST["Submit"])) {
     $target_dir = "slideshows/";
     $target_file =  $target_dir . basename($_FILES["Image"]["name"]);
     if (empty($Title)) {
-        $_SESSION["ErrorMessage"] = "Title can't be empty";
+        $_SESSION["ErrorMessage"] = "GAGAL! Title tidak boleh dikosongkan!";
         Redirect_to("dashBeranda.php");
     } elseif (strlen($Title) < 2) {
-        $_SESSION["ErrorMessage"] = "Title should be at-least 2 character";
+        $_SESSION["ErrorMessage"] = "GAGAL! Title tidak boleh kurang dari 2 huruf!";
+        Redirect_to("dashBeranda.php");
+    } elseif (empty($Image)) {
+        $_SESSION["ErrorMessage"] = "GAGAL! Gambar tidak boleh dikosongkan!";
         Redirect_to("dashBeranda.php");
     } else {
         //global $Connection;        
@@ -55,7 +58,7 @@ if (isset($_POST["Submit"])) {
 
     <!-- <script src="js/bootstrap.min.js"></script> -->
 
-    <title>Dashboard</title>
+    <title>Manage Beranda</title>
 </head>
 
 <body>
@@ -104,7 +107,7 @@ if (isset($_POST["Submit"])) {
             <div class="col-sm-2">
                 <br>
                 <ul id="side_menu" class="nav nav-pills nav-stacked">
-                    <li class="active"><a href="dashboard.php"> <span class="glyphicon glyphicon-th"></span>
+                    <li><a href="dashboard.php"> <span class="glyphicon glyphicon-th"></span>
                             &nbsp;Dashboard</a></li>
                     <li><a href="addnewpost.php"><span class="glyphicon glyphicon-list-alt"></span>
                             &nbsp;Add New Post</a></li>
@@ -112,6 +115,8 @@ if (isset($_POST["Submit"])) {
                             &nbsp;Categories</a></li>
                     <li><a href="manageadmin.php"><span class="glyphicon glyphicon-user"></span>
                             &nbsp;Manage Admin</a></li>
+                    <li class="active"><a href="dashBeranda.php"> <span class="glyphicon glyphicon-home"></span>
+                            &nbsp;Manage Beranda</a></li>
                     <li><a href="comments.php"><span class="glyphicon glyphicon-comment"></span>
                             &nbsp;Comments
 
@@ -145,7 +150,7 @@ if (isset($_POST["Submit"])) {
                     ?>
                 </div>
                 <!-- End of MESSAGE area -->
-                <h1>Dashboard Beranda</h1>
+                <h1>Manage Beranda</h1>
                 <!-- ADD NEW SLIDE area -->
                 <div>
                     <form action="dashBeranda.php" method="post" enctype="multipart/form-data">

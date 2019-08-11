@@ -97,6 +97,7 @@ if (isset($_POST["Submit"])) {
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-2">
+                <br>
                 <ul id="side_menu" class="nav nav-pills nav-stacked">
                     <li><a href="dashboard.php"> <span class="glyphicon glyphicon-th"></span>
                             &nbsp;Dashboard</a></li>
@@ -106,6 +107,8 @@ if (isset($_POST["Submit"])) {
                             &nbsp;Categories</a></li>
                     <li class="active"><a href="manageadmin.php"><span class="glyphicon glyphicon-user"></span>
                             &nbsp;Manage Admin</a></li>
+                    <li><a href="dashBeranda.php"> <span class="glyphicon glyphicon-home"></span>
+                            &nbsp;Manage Beranda</a></li>
                     <li><a href="comments.php"><span class="glyphicon glyphicon-comment"></span>
                             &nbsp;Comments
 

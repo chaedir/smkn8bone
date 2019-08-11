@@ -2,42 +2,46 @@
 <?php require_once("include/session.php"); ?>
 <?php require_once("include/functions.php"); ?>
 <?php Confirm_Login(); ?>
+<!-- SUBMIT BUTTON configuration -->
 <?php
 if (isset($_POST["Submit"])) {
     $Title = mysqli_real_escape_string($Connection, $_POST["Title"]);
-    $Category = mysqli_real_escape_string($Connection, $_POST["Category"]); //NEED CHANGE
-    $Post = mysqli_real_escape_string($Connection, $_POST["Post"]); //NEED CHANGE
+
     date_default_timezone_set("Asia/Makassar");
     $CurrentTime = time();
     //$DateTime = strftime("%Y-%m-%d %H:%M:%S", $CurrentTime);
-    $DateTime = strftime("%d %B %Y", $CurrentTime);
+    $DateTime = strftime("%A %H:%M - %d %B %Y", $CurrentTime);
     $DateTime;
-    $Admin = "Chaedir";
+    $Admin = $_SESSION["Username"];
     $Image = $_FILES["Image"]["name"];
-    $target_dir = "assets/";
+    $target_dir = "slideshows/";
     $target_file =  $target_dir . basename($_FILES["Image"]["name"]);
     if (empty($Title)) {
-        $_SESSION["ErrorMessage"] = "Title can't be empty";
-        Redirect_to("addnewpost.php");
+        $_SESSION["ErrorMessage"] = "GAGAL! Title tidak boleh dikosongkan!";
+        Redirect_to("dashBeranda.php");
     } elseif (strlen($Title) < 2) {
-        $_SESSION["ErrorMessage"] = "Title should be at-least 2 character";
-        Redirect_to("addnewpost.php");
+        $_SESSION["ErrorMessage"] = "GAGAL! Title tidak boleh kurang dari 2 huruf!";
+        Redirect_to("dashBeranda.php");
+    } elseif (empty($Image)) {
+        $_SESSION["ErrorMessage"] = "GAGAL! Gambar tidak boleh dikosongkan!";
+        Redirect_to("dashBeranda.php");
     } else {
         //global $Connection;
         $EditIDFromURL = $_GET["edit"];
-        $Query = mysqli_query($Connection, "UPDATE admin_panel SET datetime='" . $DateTime . "', title='" . $Title . "', category_name='" . $Category . "', author='" . $Admin . "', image='" . $Image . "', post='" . $Post . "' WHERE id = '" . $EditIDFromURL . "'");
+        $Query = mysqli_query($Connection, "UPDATE slideshow SET datetime='" . $DateTime . "', image='" . $Image . "', title='" . $Title . "', author='" . $Admin . "' WHERE id = '" . $EditIDFromURL . "'");
         /*$Query = "UPDATE admin_panel SET datetime='" . $DateTime . "', title='" . $Title . "', category_name='" . $Category . "', author='" . $Admin . "', image='" . $Image . "', post='" . $Post . "' WHERE id = '" . $EditIDFromURL . "'";*/
         move_uploaded_file($_FILES['Image']['tmp_name'], $target_file);
         if ($Query) {
-            $_SESSION["SuccessMessage"] = "Post updated successfully";
-            Redirect_to("dashboard.php");
+            $_SESSION["SuccessMessage"] = "Sukses mengupdate data slide!";
+            Redirect_to("dashBeranda.php");
         } else {
-            $_SESSION["ErrorMessage"] = "Something went wrong, try again !";
-            Redirect_to("dashboard.php");
+            $_SESSION["ErrorMessage"] = "Ups, terjadi kesalahan. Coba lagi atau hubungi programmer terkait!";
+            Redirect_to("dashBeranda.php");
         }
     }
 }
 ?>
+<!-- end of SUBMIT BUTTON configuration -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -62,6 +66,7 @@ if (isset($_POST["Submit"])) {
 <body>
     <div class="container-fluid">
         <div class="row">
+            <!--SIDE Area-->
             <div class="col-sm-2">
                 <ul id="side_menu" class="nav nav-pills nav-stacked">
                     <li><a href="dashboard.php"> <span class="glyphicon glyphicon-th"></span>
@@ -80,55 +85,55 @@ if (isset($_POST["Submit"])) {
                             &nbsp;Logout</a></li>
                 </ul>
             </div>
+            <!--End of SIDE Area-->
+
+            <!--MAIN Area-->
             <div class="col-sm-10">
                 <h1>Update Beranda</h1>
+                <!-- MESSAGE area -->
                 <div>
                     <?php echo Message();
                     echo SuccessMessage();
                     ?>
                 </div>
+                <!-- End of MESSAGE area -->
+
+                <!-- EDIT area -->
                 <div>
                     <?php
                     $EditIDFromURL = $_GET["edit"];
-                    $viewQuery = $Connection->query("SELECT * FROM beranda WHERE id=' $EditIDFromURL'");
+                    $viewQuery = $Connection->query("SELECT * FROM slideshow WHERE id=' $EditIDFromURL'");
                     while ($fetchData = mysqli_fetch_array($viewQuery)) {
-                        $Heading1 = $fetchData["heading1"];
-                        $Heading2 = $fetchData["heading2"];
-                    }
-                    ?>
+                        $Id = $fetchData["id"];
+                        $DateTime = $fetchData["datetime"];
+                        $ImageToUpdate = $fetchData["image"];
+                        $Title = $fetchData["title"];
+                        $Admin = $fetchData["author"];
+                        ?>
 
-                    <form action="editBeranda.php?edit=<?php echo $EditIDFromURL; ?>" method="post" enctype="multipart/form-data">
-                        <fieldset>
-                            <div class="form-group">
-                                <label for="title"><span class="Fieldinfo">Heading1:</span></label>
-                                <input value="<?php echo $Heading1; ?>" class="form-control" type="text" name="Title" id="title" placeholder="Title">
+                        <form action="editBeranda.php?edit=<?php echo $EditIDFromURL; ?>" method="post" enctype="multipart/form-data">
+                            <fieldset>
+                                <div class="form-group">
+                                    <label for="title"><span class="Fieldinfo">Title:</span></label>
+                                    <input value="<?php echo $Title; ?>" class="form-control" type="text" name="Title" id="title" placeholder="Title">
+                                    <br>
+                                </div>
+                                <div class="form-group">
+                                    <span class="Fieldinfo">Existing Image:</span>
+                                    <img src="slideshows/<?php echo $ImageToUpdate; ?>" width="170" ; height="80px"><br>
+                                    <label for="imageselect"><span class="Fieldinfo">Select Image:</span></label>
+                                    <input type="File" class="form-control" name="Image" id="imageselect">
+                                    <br>
+                                </div>
+                                <input class="btn btn-success btn-block" type="submit" name="Submit" value="Update Slide">
                                 <br>
-                            </div>
-                            <div class="form-group">
-                                <label for="title"><span class="Fieldinfo">Heading2:</span></label>
-                                <input value="<?php echo $Heading2; ?>" class="form-control" type="text" name="Title" id="title" placeholder="Title">
-                                <br>
-                            </div>
-                            <div class="form-group">
-                                <span class="Fieldinfo">Existing Image:</span>
-                                <img src="assets/<?php echo $ImageToUpdate; ?>" width="170" ; height="80px"><br>
-                                <label for="imageselect"><span class="Fieldinfo">Select Image:</span></label>
-                                <input type="File" class="form-control" name="Image" id="imageselect">
-                                <br>
-                            </div>
-                            <div class="form-group">
-                                <label for="postarea"><span class="Fieldinfo">Post:</span></label>
-                                <textarea name="Post" id="postarea" class="form-control"><?php echo $PostToUpdate; ?></textarea>
-                                <br>
-                            </div>
-                            <input class="btn btn-success btn-block" type="submit" name="Submit" value="Update Post">
-                            <br>
+                            </fieldset>
+                        </form>
+                    <?php } ?>
                 </div>
-                </fieldset>
-                </form>
+                <!-- End of EDIT area -->
             </div>
-
-
+            <!--End of MAIN Area-->
         </div>
     </div>
     </div>
