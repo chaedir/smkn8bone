@@ -109,6 +109,8 @@ if (isset($_POST["Submit"])) {
                             &nbsp;Manage Admin</a></li>
                     <li><a href="dashBeranda.php"> <span class="glyphicon glyphicon-home"></span>
                             &nbsp;Manage Beranda</a></li>
+                    <li><a href="dashTentang.php"><span class="glyphicon glyphicon-list-alt"></span>
+                            &nbsp;Tentang Sekolah</a></li>
                     <li><a href="comments.php"><span class="glyphicon glyphicon-comment"></span>
                             &nbsp;Comments
 
@@ -119,9 +121,9 @@ if (isset($_POST["Submit"])) {
 
                             if ($totalUnApproved > 0) {
                                 ?>
-                                <span class="label pull-right label-warning">
-                                    <?php echo $totalUnApproved; ?>
-                                </span>
+                            <span class="label pull-right label-warning">
+                                <?php echo $totalUnApproved; ?>
+                            </span>
                             <?php } ?>
 
                         </a></li>
@@ -180,16 +182,16 @@ if (isset($_POST["Submit"])) {
                             $SrNo++;
 
                             ?>
-                            <tr>
-                                <td><?php echo $SrNo; ?></td>
-                                <td><?php echo $DateTime; ?></td>
-                                <td><?php echo $Username; ?></td>
-                                <td><?php echo $Admin; ?></td>
-                                <td><a href="deleteAdmin.php?id=<?php echo $Id; ?>">
-                                        <span class="btn btn-danger">Delete</span>
-                                    </a>
-                                </td>
-                            </tr>
+                        <tr>
+                            <td><?php echo $SrNo; ?></td>
+                            <td><?php echo $DateTime; ?></td>
+                            <td><?php echo $Username; ?></td>
+                            <td><?php echo $Admin; ?></td>
+                            <td><a href="deleteAdmin.php?id=<?php echo $Id; ?>">
+                                    <span class="btn btn-danger">Delete</span>
+                                </a>
+                            </td>
+                        </tr>
                         <?php } ?>
                     </table>
                 </div>

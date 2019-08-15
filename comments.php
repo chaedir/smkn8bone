@@ -76,6 +76,8 @@
                             &nbsp;Manage Admin</a></li>
                     <li><a href="dashBeranda.php"> <span class="glyphicon glyphicon-home"></span>
                             &nbsp;Manage Beranda</a></li>
+                    <li><a href="dashTentang.php"><span class="glyphicon glyphicon-list-alt"></span>
+                            &nbsp;Tentang Sekolah</a></li>
                     <li class="active"><a href="comments.php"><span class="glyphicon glyphicon-comment"></span>
                             &nbsp;Comments</a></li>
                     <li><a href="blog.php?Page=1" target="_blank"><span class="glyphicon glyphicon-equalizer"></span>
@@ -119,24 +121,24 @@
                                 $PersonName = substr($PersonName, 0, 13) . '...';
                             }
                             ?>
-                            <tr>
-                                <td><?php echo htmlentities($SrNo); ?></td>
-                                <td><?php echo htmlentities($DateTimeofComment); ?></td>
-                                <td style="color:cadetblue"><?php echo htmlentities($PersonName); ?></td>
-                                <td><?php echo htmlentities($Comment); ?></td>
-                                <td>
-                                    <a href="approveComment.php?id=<?php echo $CommentId; ?>">
-                                        <span class="btn btn-success" style="margin: 2px 0;">Approve</span></a>
-                                </td>
-                                <td>
-                                    <a href="deleteComment.php?id=<?php echo $CommentId; ?>">
-                                        <span class="btn btn-danger" style="margin: 2px 0;">Delete</span></a>
-                                </td>
-                                <td>
-                                    <a href="fullPost.php?id=<?php echo $CommentedPostId; ?>" target="_blank">
-                                        <span class="btn btn-primary" style="margin: 2px 0;">Live Preview</span></a>
-                                </td>
-                            </tr>
+                        <tr>
+                            <td><?php echo htmlentities($SrNo); ?></td>
+                            <td><?php echo htmlentities($DateTimeofComment); ?></td>
+                            <td style="color:cadetblue"><?php echo htmlentities($PersonName); ?></td>
+                            <td><?php echo htmlentities($Comment); ?></td>
+                            <td>
+                                <a href="approveComment.php?id=<?php echo $CommentId; ?>">
+                                    <span class="btn btn-success" style="margin: 2px 0;">Approve</span></a>
+                            </td>
+                            <td>
+                                <a href="deleteComment.php?id=<?php echo $CommentId; ?>">
+                                    <span class="btn btn-danger" style="margin: 2px 0;">Delete</span></a>
+                            </td>
+                            <td>
+                                <a href="fullPost.php?id=<?php echo $CommentedPostId; ?>" target="_blank">
+                                    <span class="btn btn-primary" style="margin: 2px 0;">Live Preview</span></a>
+                            </td>
+                        </tr>
                         <?php } ?>
                     </table>
                 </div>
@@ -170,25 +172,25 @@
                                 $PersonName = substr($PersonName, 0, 13) . '...';
                             }
                             ?>
-                            <tr>
-                                <td><?php echo htmlentities($SrNo); ?></td>
-                                <td><?php echo htmlentities($DateTimeofComment); ?></td>
-                                <td style="color:cadetblue;"><?php echo htmlentities($PersonName); ?></td>
-                                <td><?php echo htmlentities($Comment); ?></td>
-                                <td><?php echo htmlentities($ApprovedBy); ?></td>
-                                <td>
-                                    <a href="disapproveComment.php?id=<?php echo $CommentId; ?>">
-                                        <span class="btn btn-warning" style="margin: 2px 0;">Disapprove</span></a>
-                                </td>
-                                <td>
-                                    <a href="deleteComment.php?id=<?php echo $CommentId; ?>">
-                                        <span class="btn btn-danger" style="margin: 2px 0;">Delete</span></a>
-                                </td>
-                                <td>
-                                    <a href="fullPost.php?id=<?php echo $CommentedPostId; ?>" target="_blank">
-                                        <span class="btn btn-primary" style="margin: 2px 0;">Live Preview</span></a>
-                                </td>
-                            </tr>
+                        <tr>
+                            <td><?php echo htmlentities($SrNo); ?></td>
+                            <td><?php echo htmlentities($DateTimeofComment); ?></td>
+                            <td style="color:cadetblue;"><?php echo htmlentities($PersonName); ?></td>
+                            <td><?php echo htmlentities($Comment); ?></td>
+                            <td><?php echo htmlentities($ApprovedBy); ?></td>
+                            <td>
+                                <a href="disapproveComment.php?id=<?php echo $CommentId; ?>">
+                                    <span class="btn btn-warning" style="margin: 2px 0;">Disapprove</span></a>
+                            </td>
+                            <td>
+                                <a href="deleteComment.php?id=<?php echo $CommentId; ?>">
+                                    <span class="btn btn-danger" style="margin: 2px 0;">Delete</span></a>
+                            </td>
+                            <td>
+                                <a href="fullPost.php?id=<?php echo $CommentedPostId; ?>" target="_blank">
+                                    <span class="btn btn-primary" style="margin: 2px 0;">Live Preview</span></a>
+                            </td>
+                        </tr>
                         <?php } ?>
                     </table>
                 </div>

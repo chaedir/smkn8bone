@@ -2,42 +2,51 @@
 <?php require_once("include/session.php"); ?>
 <?php require_once("include/functions.php"); ?>
 <?php Confirm_Login(); ?>
+<!-- SUBMIT BUTTON configuration -->
 <?php
 if (isset($_POST["Submit"])) {
-    $Title = mysqli_real_escape_string($Connection, $_POST["Title"]);
-    $Category = mysqli_real_escape_string($Connection, $_POST["Category"]);
-    $Post = mysqli_real_escape_string($Connection, $_POST["Post"]);
+    $p1_title = mysqli_real_escape_string($Connection, $_POST["Title1"]);
+    $p2_title = mysqli_real_escape_string($Connection, $_POST["Title2"]);
+    $p3_title = mysqli_real_escape_string($Connection, $_POST["Title3"]);
+    $p4_title = mysqli_real_escape_string($Connection, $_POST["Title4"]);
+    $p1_post = mysqli_real_escape_string($Connection, $_POST["Post1"]);
+    $p2_post = mysqli_real_escape_string($Connection, $_POST["Post2"]);
+    $p3_post = mysqli_real_escape_string($Connection, $_POST["Post3"]);
+    $p4_post = mysqli_real_escape_string($Connection, $_POST["Post4"]);
     date_default_timezone_set("Asia/Makassar");
     $CurrentTime = time();
     //$DateTime = strftime("%Y-%m-%d %H:%M:%S", $CurrentTime);
-    $DateTime = strftime("%d %B %Y", $CurrentTime);
+    $DateTime = strftime("%A %H:%M - %d %B %Y", $CurrentTime);
     $DateTime;
-    $Admin = "Chaedir";
+    $Admin = $_SESSION["Username"];
     $Image = $_FILES["Image"]["name"];
     $target_dir = "assets/";
     $target_file =  $target_dir . basename($_FILES["Image"]["name"]);
-    if (empty($Title)) {
+    if (empty($p1_title)) {
         $_SESSION["ErrorMessage"] = "Title can't be empty";
-        Redirect_to("addnewpost.php");
-    } elseif (strlen($Title) < 2) {
+        Redirect_to("dashTentang.php");
+    } elseif (strlen($p1_title) < 2) {
         $_SESSION["ErrorMessage"] = "Title should be at-least 2 character";
-        Redirect_to("addnewpost.php");
+        Redirect_to("dashTentang.php");
     } else {
         //global $Connection;
         $EditIDFromURL = $_GET["edit"];
-        $Query = mysqli_query($Connection, "UPDATE admin_panel SET datetime='" . $DateTime . "', title='" . $Title . "', category_name='" . $Category . "', author='" . $Admin . "', image='" . $Image . "', post='" . $Post . "' WHERE id = '" . $EditIDFromURL . "'");
-        /*$Query = "UPDATE admin_panel SET datetime='" . $DateTime . "', title='" . $Title . "', category_name='" . $Category . "', author='" . $Admin . "', image='" . $Image . "', post='" . $Post . "' WHERE id = '" . $EditIDFromURL . "'";*/
+        $Query = mysqli_query($Connection, "UPDATE tentang_Sekolah SET datetime='" . $DateTime . "', author='" . $Admin . "', image='" . $Image . "', p1Title='" . $p1_title . "', p1Post='" . $p1_post . "', p2Title='" . $p2_title . "', p2Post='" . $p2_post . "', p3Title='" . $p3_title . "', p3Post='" . $p3_post . "', p4Title='" . $p4_title . "', p4Post='" . $p4_post . "' WHERE id = '" . $EditIDFromURL . "'");
+
+        //$Query = mysqli_query($Connection, "INSERT INTO tentang_Sekolah (datetime,author,image,p1Title,p1Post,p2Title,p2Post,p3Title,p3Post,p4Title,p4Post) VALUES('" . $DateTime . "','" . $Admin . "','" . $Image . "','" . $p1_title . "','" . $p1_post . "','" . $p2_title . "','" . $p2_post . "','" . $p3_title . "','" . $p3_post . "','" . $p4_title . "','" . $p4_post . "')");
+
         move_uploaded_file($_FILES['Image']['tmp_name'], $target_file);
         if ($Query) {
             $_SESSION["SuccessMessage"] = "Post updated successfully";
-            Redirect_to("dashboard.php");
+            Redirect_to("dashTentang.php");
         } else {
             $_SESSION["ErrorMessage"] = "Something went wrong, try again !";
-            Redirect_to("dashboard.php");
+            Redirect_to("dashTentang.php");
         }
     }
 }
 ?>
+<!-- end of SUBMIT BUTTON configuration -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -56,12 +65,13 @@ if (isset($_POST["Submit"])) {
 
     <!-- <script src="js/bootstrap.min.js"></script> -->
 
-    <title>Edit Post</title>
+    <title>Edit Informasi Sekolah</title>
 </head>
 
 <body>
     <div class="container-fluid">
         <div class="row">
+            <!-- SIDE area -->
             <div class="col-sm-2">
                 <ul id="side_menu" class="nav nav-pills nav-stacked">
                     <li><a href="dashboard.php"> <span class="glyphicon glyphicon-th"></span>
@@ -72,78 +82,124 @@ if (isset($_POST["Submit"])) {
                             &nbsp;Categories</a></li>
                     <li><a href="manageadmin.php"><span class="glyphicon glyphicon-user"></span>
                             &nbsp;Manage Admin</a></li>
+                    <li><a href="dashBeranda.php"> <span class="glyphicon glyphicon-home"></span>
+                            &nbsp;Manage Beranda</a></li>
+                    <li><a href="dashTentang.php"><span class="glyphicon glyphicon-list-alt"></span>
+                            &nbsp;Tentang Sekolah</a></li>
                     <li><a href="comments.php"><span class="glyphicon glyphicon-comment"></span>
-                            &nbsp;Comments</a></li>
+                            &nbsp;Comments
+
+                            <?php
+                            $queryUnApproved = $Connection->query("SELECT COUNT(*) FROM comments WHERE status='OFF'");
+                            $rowsUnApproved = mysqli_fetch_array($queryUnApproved);
+                            $totalUnApproved = array_shift($rowsUnApproved);
+
+                            if ($totalUnApproved > 0) {
+                                ?>
+                            <span class="label pull-right label-warning">
+                                <?php echo $totalUnApproved; ?>
+                            </span>
+                            <?php } ?>
+
+                        </a></li>
                     <li><a href="liveblog.php"><span class="glyphicon glyphicon-equalizer"></span>
                             &nbsp;Live Blog</a></li>
                     <li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span>
                             &nbsp;Logout</a></li>
                 </ul>
             </div>
+            <!--End of SIDE area-->
+
+            <!--MAIN area-->
             <div class="col-sm-10">
-                <h1>Update Post</h1>
+                <h1>Update Informasi Sekolah</h1>
+                <!-- MESSAGE area -->
                 <div>
                     <?php echo Message();
                     echo SuccessMessage();
                     ?>
                 </div>
+                <!-- End of MESSAGE area -->
+
+                <!-- SHOW DATABASE area -->
                 <div>
                     <?php
                     $EditIDFromURL = $_GET["edit"];
-                    $viewQuery = $Connection->query("SELECT * FROM admin_panel WHERE id=' $EditIDFromURL'");
+                    $viewQuery = $Connection->query("SELECT * FROM tentang_Sekolah WHERE id=' $EditIDFromURL'");
                     while ($fetchData = mysqli_fetch_array($viewQuery)) {
-                        $TitleToUpdate = $fetchData["title"];
-                        $CategoryToUpdate = $fetchData["category_name"];
-                        $ImageToUpdate = $fetchData["image"];
-                        $PostToUpdate = $fetchData["post"];
+                        $Image = $fetchData["image"];
+                        $p1_title = $fetchData["p1Title"];
+                        $p1_post = $fetchData["p1Post"];
+                        $p2_title = $fetchData["p2Title"];
+                        $p2_post = $fetchData["p2Post"];
+                        $p3_title = $fetchData["p3Title"];
+                        $p3_post = $fetchData["p3Post"];
+                        $p4_title = $fetchData["p4Title"];
+                        $p4_post = $fetchData["p4Post"];
                     }
                     ?>
 
-                    <form action="editPost.php?edit=<?php echo $EditIDFromURL; ?>" method="post" enctype="multipart/form-data">
+                    <form action="editTentang.php?edit=<?php echo $EditIDFromURL; ?>" method="post" enctype="multipart/form-data">
                         <fieldset>
                             <div class="form-group">
-                                <label for="title"><span class="Fieldinfo">Title:</span></label>
-                                <input value="<?php echo $TitleToUpdate; ?>" class="form-control" type="text" name="Title" id="title" placeholder="Title">
-                                <br>
-                            </div>
-                            <div class="form-group">
-                                <span class="Fieldinfo">Existing Category:</span>
-                                <?php echo $CategoryToUpdate; ?><br>
-                                <label for="categoryselect"><span class="Fieldinfo">Category:</span></label>
-                                <select name="Category" id="categoryselect" class="form-control">
-                                    <?php
-                                    //mysqli_query($Connection, "SELECT * FROM category");
-                                    $getProduct    = $Connection->query("SELECT * FROM category ORDER BY datetime desc");
-
-                                    while ($fetchProduct = mysqli_fetch_array($getProduct)) {
-                                        $Id = $fetchProduct["id"];
-                                        $CategoryName = $fetchProduct["name"];
-                                        ?>
-                                        <option><?php echo $CategoryName; ?></option>
-                                    <?php } ?>
-                                </select>
-                                <br>
-                            </div>
-                            <div class="form-group">
                                 <span class="Fieldinfo">Existing Image:</span>
-                                <img src="assets/<?php echo $ImageToUpdate; ?>" width="170" ; height="80px"><br>
+                                <img src="assets/<?php echo $Image; ?>" width="170" ; height="80px"><br>
                                 <label for="imageselect"><span class="Fieldinfo">Select Image:</span></label>
                                 <input type="File" class="form-control" name="Image" id="imageselect">
                                 <br>
                             </div>
                             <div class="form-group">
-                                <label for="postarea"><span class="Fieldinfo">Post:</span></label>
-                                <textarea name="Post" id="postarea" class="form-control"><?php echo $PostToUpdate; ?></textarea>
+                                <label for="title"><span class="Fieldinfo">Post1 Title:</span></label>
+                                <input value="<?php echo $p1_title; ?>" class="form-control" type="text" name="Title1" id="title" placeholder="Title">
                                 <br>
                             </div>
+                            <div class="form-group">
+                                <label for="postarea"><span class="Fieldinfo">Post1 Post:</span></label>
+                                <textarea name="Post1" id="postarea" class="form-control"><?php echo $p1_post; ?></textarea>
+                                <br>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="title"><span class="Fieldinfo">Post2 Title:</span></label>
+                                <input value="<?php echo $p2_title; ?>" class="form-control" type="text" name="Title2" id="title" placeholder="Title">
+                                <br>
+                            </div>
+                            <div class="form-group">
+                                <label for="postarea"><span class="Fieldinfo">Post2 Post:</span></label>
+                                <textarea name="Post2" id="postarea" class="form-control"><?php echo $p2_post; ?></textarea>
+                                <br>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="title"><span class="Fieldinfo">Post3 Title:</span></label>
+                                <input value="<?php echo $p3_title; ?>" class="form-control" type="text" name="Title3" id="title" placeholder="Title">
+                                <br>
+                            </div>
+                            <div class="form-group">
+                                <label for="postarea"><span class="Fieldinfo">Post3 Post:</span></label>
+                                <textarea name="Post3" id="postarea" class="form-control"><?php echo $p3_post; ?></textarea>
+                                <br>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="title"><span class="Fieldinfo">Post4 Title:</span></label>
+                                <input value="<?php echo $p4_title; ?>" class="form-control" type="text" name="Title4" id="title" placeholder="Title">
+                                <br>
+                            </div>
+                            <div class="form-group">
+                                <label for="postarea"><span class="Fieldinfo">Post4 Post:</span></label>
+                                <textarea name="Post4" id="postarea" class="form-control"><?php echo $p4_post; ?></textarea>
+                                <br>
+                            </div>
+
                             <input class="btn btn-success btn-block" type="submit" name="Submit" value="Update Post">
                             <br>
                 </div>
                 </fieldset>
                 </form>
+                <!-- End of SHOW DATABASE area -->
             </div>
-
-
+            <!--End of MAIN area-->
         </div>
     </div>
     </div>

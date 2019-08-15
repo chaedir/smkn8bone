@@ -20,10 +20,11 @@
 
     <!-- <script src="js/bootstrap.min.js"></script> -->
 
-    <title>Dashboard</title>
+    <title>Tentang Sekolah</title>
 </head>
 
 <body>
+    <!-- NAVBAR area -->
     <div id="head-background1">
     </div>
     <nav class="navbar navbar-inverse" role="navigation">
@@ -59,15 +60,16 @@
     </nav>
     <div id="head-background2">
     </div>
+    <!-- end of NAVBAR area -->
 
-
+    <!-- CONTAINER area -->
     <div class="container-fluid">
         <div class="row">
+            <!--SIDE area-->
             <div class="col-sm-2">
-                <!--Side Area-->
                 <br>
                 <ul id="side_menu" class="nav nav-pills nav-stacked">
-                    <li class="active"><a href="dashboard.php"> <span class="glyphicon glyphicon-th"></span>
+                    <li><a href="dashboard.php"> <span class="glyphicon glyphicon-th"></span>
                             &nbsp;Dashboard</a></li>
                     <li><a href="addnewpost.php"><span class="glyphicon glyphicon-list-alt"></span>
                             &nbsp;Add New Post</a></li>
@@ -75,6 +77,10 @@
                             &nbsp;Categories</a></li>
                     <li><a href="manageadmin.php"><span class="glyphicon glyphicon-user"></span>
                             &nbsp;Manage Admin</a></li>
+                    <li><a href="dashBeranda.php"> <span class="glyphicon glyphicon-home"></span>
+                            &nbsp;Manage Beranda</a></li>
+                    <li class="active"><a href="dashTentang.php"><span class="glyphicon glyphicon-list-alt"></span>
+                            &nbsp;Tentang Sekolah</a></li>
                     <li><a href="comments.php"><span class="glyphicon glyphicon-comment"></span>
                             &nbsp;Comments
 
@@ -85,9 +91,9 @@
 
                             if ($totalUnApproved > 0) {
                                 ?>
-                                <span class="label pull-right label-warning">
-                                    <?php echo $totalUnApproved; ?>
-                                </span>
+                            <span class="label pull-right label-warning">
+                                <?php echo $totalUnApproved; ?>
+                            </span>
                             <?php } ?>
 
                         </a></li>
@@ -97,118 +103,80 @@
                             &nbsp;Logout</a></li>
                 </ul>
             </div>
-            <!--Ending of Side Area-->
+            <!--end of SIDE area-->
+
+            <!--MAIN area-->
             <div class="col-sm-10">
-                <!--Main Area-->
+                <!-- MESSAGE area -->
                 <div>
                     <?php echo Message();
                     echo SuccessMessage();
                     ?>
                 </div>
-                <h1>Admin Dashboard</h1>
+                <!-- End of MESSAGE area -->
+
+                <h1>Tentang Sekolah</h1>
+                <!-- SHOW DATA area -->
                 <div class="table-responsive">
                     <table class="table table-striped table-hover">
                         <tr>
-                            <th>No</th>
-                            <th>Post Title</th>
                             <th>Date & Time</th>
                             <th>Author</th>
-                            <th>Category</th>
                             <th>Banner</th>
-                            <th>Comments</th>
                             <th>Action</th>
                             <th>Details</th>
                         </tr>
 
                         <?php
-                        $viewQuery = $Connection->query("SELECT * FROM admin_panel ORDER BY id desc");
-                        $SrNo = 0;
+                        $viewQuery = $Connection->query("SELECT * FROM tentang_Sekolah");
                         while ($fetchData = mysqli_fetch_array($viewQuery)) {
                             $Id = $fetchData["id"];
                             $DateTime = $fetchData["datetime"];
-                            $Title = $fetchData["title"];
-                            $Category = $fetchData["category_name"];
                             $Admin = $fetchData["author"];
                             $Image = $fetchData["image"];
-                            $Post = $fetchData["post"];
-                            $SrNo++;
-
                             ?>
-                            <tr>
-                                <td><?php echo $SrNo; ?></td>
-                                <td style="color: #5e5eff;">
-                                    <?php
+                        <tr>
+                            <!--<td><?php echo $SrNo; ?></td>
+                             <td style="color: #5e5eff;">
+                                <?php
                                     if (strlen($Title) > 50) {
                                         $Title = substr($Title, 0, 50) . '...';
                                     }
                                     echo $Title;
                                     ?>
-                                </td>
-                                <td><?php echo $DateTime; ?></td>
-                                <td>
-                                    <?php
+                            </td> -->
+                            <td><?php echo $DateTime; ?></td>
+                            <td>
+                                <?php
                                     if (strlen($Admin) > 40) {
                                         $Admin = substr($Admin, 0, 40) . '...';
                                     }
                                     echo $Admin;
                                     ?>
-                                </td>
-                                <td>
-                                    <?php
-                                    if (strlen($Category) > 40) {
-                                        $Category = substr($Category, 0, 40) . '...';
-                                    }
-                                    echo $Category;
-                                    ?></td>
-                                <td><img src="assets/<?php echo $Image; ?>" width="170" ; height="50px"></td>
-                                <td>
-                                    <?php
-                                    $queryApproved = $Connection->query("SELECT COUNT(*) FROM comments WHERE admin_panel_id='$Id' AND status='ON'");
-                                    $rowsApproved = mysqli_fetch_array($queryApproved);
-                                    $totalApproved = array_shift($rowsApproved);
+                            </td>
+                            <td><img src="assets/<?php echo $Image; ?>" width="170" ; height="170px"></td>
 
-                                    if ($totalApproved > 0) {
-                                        ?>
-                                        <span class="label pull-right label-success">
-                                            <?php echo $totalApproved; ?>
-                                        </span>
-                                    <?php } ?>
-
-                                    <?php
-                                    $queryUnApproved = $Connection->query("SELECT COUNT(*) FROM comments WHERE admin_panel_id='$Id' AND status='OFF'");
-                                    $rowsUnApproved = mysqli_fetch_array($queryUnApproved);
-                                    $totalUnApproved = array_shift($rowsUnApproved);
-
-                                    if ($totalUnApproved > 0) {
-                                        ?>
-                                        <span class="label pull-left label-warning">
-                                            <?php echo $totalUnApproved; ?>
-                                        </span>
-                                    <?php } ?>
-
-                                </td>
-                                <td>
-                                    <a href="editPost.php?edit=<?php echo $Id; ?>">
-                                        <span class="btn btn-warning" style="margin: 2px 0;">Edit</span></a>
-
-                                    <a href="deletePost.php?delete=<?php echo $Id; ?>">
-                                        <span class="btn btn-danger" style="margin: 2px 0;">Delete</span></a>
-                                </td>
-                                <td>
-                                    <a href="fullPost.php?id=<?php echo $Id; ?>" target="_blank">
-                                        <span class="btn btn-primary" style="margin: 2px 0;">Live Preview</span></a>
-                                </td>
-                                <!-- <td><?php echo $Post; ?></td> -->
-                            </tr>
+                            <td>
+                                <a href="editTentang.php?edit=<?php echo $Id; ?>">
+                                    <span class="btn btn-warning" style="margin: 2px 0;">Edit</span></a>
+                            </td>
+                            <td>
+                                <a href="about.php" target="_blank">
+                                    <span class="btn btn-primary" style="margin: 2px 0;">Live Preview</span></a>
+                            </td>
+                            <!-- <td><?php echo $Post; ?></td> -->
+                        </tr>
                         <?php } ?>
 
 
                     </table>
                 </div>
+                <!-- SHOW DATA area -->
             </div>
-            <!--Ending of Main Area-->
+            <!--end of MAIN area-->
         </div>
     </div>
+    <!-- end of CONTAINER area -->
 
     <footer id="main-footer">
         Copyright &copy; 2019 SMKN 8 Bone

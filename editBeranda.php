@@ -77,8 +77,26 @@ if (isset($_POST["Submit"])) {
                             &nbsp;Categories</a></li>
                     <li><a href="manageadmin.php"><span class="glyphicon glyphicon-user"></span>
                             &nbsp;Manage Admin</a></li>
+                    <li><a href="dashBeranda.php"> <span class="glyphicon glyphicon-home"></span>
+                            &nbsp;Manage Beranda</a></li>
+                    <li><a href="dashTentang.php"><span class="glyphicon glyphicon-list-alt"></span>
+                            &nbsp;Tentang Sekolah</a></li>
                     <li><a href="comments.php"><span class="glyphicon glyphicon-comment"></span>
-                            &nbsp;Comments</a></li>
+                            &nbsp;Comments
+
+                            <?php
+                            $queryUnApproved = $Connection->query("SELECT COUNT(*) FROM comments WHERE status='OFF'");
+                            $rowsUnApproved = mysqli_fetch_array($queryUnApproved);
+                            $totalUnApproved = array_shift($rowsUnApproved);
+
+                            if ($totalUnApproved > 0) {
+                                ?>
+                            <span class="label pull-right label-warning">
+                                <?php echo $totalUnApproved; ?>
+                            </span>
+                            <?php } ?>
+
+                        </a></li>
                     <li><a href="liveblog.php"><span class="glyphicon glyphicon-equalizer"></span>
                             &nbsp;Live Blog</a></li>
                     <li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span>
@@ -111,24 +129,24 @@ if (isset($_POST["Submit"])) {
                         $Admin = $fetchData["author"];
                         ?>
 
-                        <form action="editBeranda.php?edit=<?php echo $EditIDFromURL; ?>" method="post" enctype="multipart/form-data">
-                            <fieldset>
-                                <div class="form-group">
-                                    <label for="title"><span class="Fieldinfo">Title:</span></label>
-                                    <input value="<?php echo $Title; ?>" class="form-control" type="text" name="Title" id="title" placeholder="Title">
-                                    <br>
-                                </div>
-                                <div class="form-group">
-                                    <span class="Fieldinfo">Existing Image:</span>
-                                    <img src="slideshows/<?php echo $ImageToUpdate; ?>" width="170" ; height="80px"><br>
-                                    <label for="imageselect"><span class="Fieldinfo">Select Image:</span></label>
-                                    <input type="File" class="form-control" name="Image" id="imageselect">
-                                    <br>
-                                </div>
-                                <input class="btn btn-success btn-block" type="submit" name="Submit" value="Update Slide">
+                    <form action="editBeranda.php?edit=<?php echo $EditIDFromURL; ?>" method="post" enctype="multipart/form-data">
+                        <fieldset>
+                            <div class="form-group">
+                                <label for="title"><span class="Fieldinfo">Title:</span></label>
+                                <input value="<?php echo $Title; ?>" class="form-control" type="text" name="Title" id="title" placeholder="Title">
                                 <br>
-                            </fieldset>
-                        </form>
+                            </div>
+                            <div class="form-group">
+                                <span class="Fieldinfo">Existing Image:</span>
+                                <img src="slideshows/<?php echo $ImageToUpdate; ?>" width="170" ; height="80px"><br>
+                                <label for="imageselect"><span class="Fieldinfo">Select Image:</span></label>
+                                <input type="File" class="form-control" name="Image" id="imageselect">
+                                <br>
+                            </div>
+                            <input class="btn btn-success btn-block" type="submit" name="Submit" value="Update Slide">
+                            <br>
+                        </fieldset>
+                    </form>
                     <?php } ?>
                 </div>
                 <!-- End of EDIT area -->

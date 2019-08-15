@@ -103,7 +103,7 @@ if (isset($_POST["Submit"])) {
     <!-- CONTAINER area -->
     <div class="container-fluid">
         <div class="row">
-            <!--SIDE Area-->
+            <!--SIDE area-->
             <div class="col-sm-2">
                 <br>
                 <ul id="side_menu" class="nav nav-pills nav-stacked">
@@ -117,6 +117,8 @@ if (isset($_POST["Submit"])) {
                             &nbsp;Manage Admin</a></li>
                     <li class="active"><a href="dashBeranda.php"> <span class="glyphicon glyphicon-home"></span>
                             &nbsp;Manage Beranda</a></li>
+                    <li><a href="dashTentang.php"><span class="glyphicon glyphicon-list-alt"></span>
+                            &nbsp;Tentang Sekolah</a></li>
                     <li><a href="comments.php"><span class="glyphicon glyphicon-comment"></span>
                             &nbsp;Comments
 
@@ -127,9 +129,9 @@ if (isset($_POST["Submit"])) {
 
                             if ($totalUnApproved > 0) {
                                 ?>
-                                <span class="label pull-right label-warning">
-                                    <?php echo $totalUnApproved; ?>
-                                </span>
+                            <span class="label pull-right label-warning">
+                                <?php echo $totalUnApproved; ?>
+                            </span>
                             <?php } ?>
 
                         </a></li>
@@ -139,9 +141,9 @@ if (isset($_POST["Submit"])) {
                             &nbsp;Logout</a></li>
                 </ul>
             </div>
-            <!--End of SIDE Area-->
+            <!--End of SIDE area-->
 
-            <!--MAIN Area-->
+            <!--MAIN area-->
             <div class="col-sm-10">
                 <!-- MESSAGE area -->
                 <div>
@@ -198,45 +200,45 @@ if (isset($_POST["Submit"])) {
                             $SrNo++;
 
                             ?>
-                            <tr>
-                                <td><?php echo $SrNo; ?></td>
-                                <td style="color: #5e5eff;">
-                                    <?php
+                        <tr>
+                            <td><?php echo $SrNo; ?></td>
+                            <td style="color: #5e5eff;">
+                                <?php
                                     if (strlen($Title) > 50) {
                                         $Title = substr($Title, 0, 50) . '...';
                                     }
                                     echo $Title;
                                     ?>
-                                </td>
-                                <td><?php echo $DateTime; ?></td>
-                                <td>
-                                    <?php
+                            </td>
+                            <td><?php echo $DateTime; ?></td>
+                            <td>
+                                <?php
                                     if (strlen($Admin) > 40) {
                                         $Admin = substr($Admin, 0, 40) . '...';
                                     }
                                     echo $Admin;
                                     ?>
-                                </td>
-                                <td><img src="slideshows/<?php echo $Image; ?>" width="170" ; height="50px"></td>
-                                <td>
-                                    <a href="editBeranda.php?edit=<?php echo $Id; ?>">
-                                        <span class="btn btn-warning" style="margin: 2px 0;">Edit</span></a>
+                            </td>
+                            <td><img src="slideshows/<?php echo $Image; ?>" width="170" ; height="50px"></td>
+                            <td>
+                                <a href="editBeranda.php?edit=<?php echo $Id; ?>">
+                                    <span class="btn btn-warning" style="margin: 2px 0;">Edit</span></a>
 
-                                    <a href="deleteBeranda.php?delete=<?php echo $Id; ?>">
-                                        <span class="btn btn-danger" style="margin: 2px 0;">Delete</span></a>
-                                </td>
-                                <td>
-                                    <a href="index.php?id=<?php echo $Id; ?>" target="_blank">
-                                        <span class="btn btn-primary" style="margin: 2px 0;">Live Preview</span></a>
-                                </td>
-                                <!-- <td><?php echo $Post; ?></td> -->
-                            </tr>
+                                <a href="deleteBeranda.php?delete=<?php echo $Id; ?>">
+                                    <span class="btn btn-danger" style="margin: 2px 0;">Delete</span></a>
+                            </td>
+                            <td>
+                                <a href="index.php?id=<?php echo $Id; ?>" target="_blank">
+                                    <span class="btn btn-primary" style="margin: 2px 0;">Live Preview</span></a>
+                            </td>
+                            <!-- <td><?php echo $Post; ?></td> -->
+                        </tr>
                         <?php } ?>
                     </table>
                 </div>
                 <!--End of SLIDESHOW Area-->
             </div>
-            <!--End of MAIN Area-->
+            <!--End of MAIN area-->
         </div>
     </div>
     <!-- end of CONTAINER area -->

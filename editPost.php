@@ -72,8 +72,26 @@ if (isset($_POST["Submit"])) {
                             &nbsp;Categories</a></li>
                     <li><a href="manageadmin.php"><span class="glyphicon glyphicon-user"></span>
                             &nbsp;Manage Admin</a></li>
+                    <li><a href="dashBeranda.php"> <span class="glyphicon glyphicon-home"></span>
+                            &nbsp;Manage Beranda</a></li>
+                    <li><a href="dashTentang.php"><span class="glyphicon glyphicon-list-alt"></span>
+                            &nbsp;Tentang Sekolah</a></li>
                     <li><a href="comments.php"><span class="glyphicon glyphicon-comment"></span>
-                            &nbsp;Comments</a></li>
+                            &nbsp;Comments
+
+                            <?php
+                            $queryUnApproved = $Connection->query("SELECT COUNT(*) FROM comments WHERE status='OFF'");
+                            $rowsUnApproved = mysqli_fetch_array($queryUnApproved);
+                            $totalUnApproved = array_shift($rowsUnApproved);
+
+                            if ($totalUnApproved > 0) {
+                                ?>
+                            <span class="label pull-right label-warning">
+                                <?php echo $totalUnApproved; ?>
+                            </span>
+                            <?php } ?>
+
+                        </a></li>
                     <li><a href="liveblog.php"><span class="glyphicon glyphicon-equalizer"></span>
                             &nbsp;Live Blog</a></li>
                     <li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span>
@@ -119,7 +137,7 @@ if (isset($_POST["Submit"])) {
                                         $Id = $fetchProduct["id"];
                                         $CategoryName = $fetchProduct["name"];
                                         ?>
-                                        <option><?php echo $CategoryName; ?></option>
+                                    <option><?php echo $CategoryName; ?></option>
                                     <?php } ?>
                                 </select>
                                 <br>
