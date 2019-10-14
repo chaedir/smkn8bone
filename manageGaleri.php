@@ -18,23 +18,23 @@ if (isset($_POST["Submit"])) {
     $target_file =  $target_dir . basename($_FILES["Image"]["name"]);
     if (empty($Title)) {
         $_SESSION["ErrorMessage"] = "GAGAL! Title tidak boleh dikosongkan!";
-        Redirect_to("manageGaleri.php");
+        Redirect_to("manageGaleri.php?Page=1");
     } elseif (strlen($Title) < 2) {
         $_SESSION["ErrorMessage"] = "GAGAL! Title tidak boleh kurang dari 2 huruf!";
-        Redirect_to("manageGaleri.php");
+        Redirect_to("manageGaleri.php?Page=1");
     } elseif (empty($Image)) {
         $_SESSION["ErrorMessage"] = "GAGAL! Gambar tidak boleh dikosongkan!";
-        Redirect_to("manageGaleri.php");
+        Redirect_to("manageGaleri.php?Page=1");
     } else {
         //global $Connection;        
         $Query = mysqli_query($Connection, "INSERT INTO galeri (datetime,image,title,description,author) VALUES('" . $DateTime . "','" . $Image . "','" . $Title . "','".$Description."','" . $Admin . "')");
         move_uploaded_file($_FILES['Image']['tmp_name'], $target_file);
         if ($Query) {
             $_SESSION["SuccessMessage"] = "Sukses menambahkan ke Galeri !";
-            Redirect_to("manageGaleri.php");
+            Redirect_to("manageGaleri.php?Page=1");
         } else {
             $_SESSION["ErrorMessage"] = "Something went wrong, try again !";
-            Redirect_to("manageGaleri.php");
+            Redirect_to("manageGaleri.php?Page=1");
         }
     }
 }
@@ -62,6 +62,44 @@ if (isset($_POST["Submit"])) {
     <title>Manage Galeri</title>
 </head>
 <!--End of Head Area -->
+
+<!-- STYLE AREA -->
+<style>
+    /* THIS STYLE ONLY FOR PAGINATION */
+    .paginationS {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        padding-top: 10px;
+    }
+
+    .page {
+        grid-column: 1;
+        justify-self: center;
+    }
+
+    .pagination {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    border: 1px solid #ddd;
+    margin: 0 4px;
+    }
+
+    .aktif {
+    background-color: #1f70cc;
+    color: white;
+    border: 1px solid #1f70cc;
+    }
+
+    .pagination:hover:not(.aktif) {
+    background-color: #ddd;
+    }
+</style>
+<!-- END OF STYLE AREA -->
+
+<!-- BODY AREA -->
 <body>
     <!-- NAVBAR area -->
     <div id="head-background1">
@@ -81,19 +119,18 @@ if (isset($_POST["Submit"])) {
             </div>
             <div class="collapse navbar-collapse" id="collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="#">Home</a></li>
-                    <li class="active"><a href="backup.php?Page=1" target="_blank">Blog</a></li>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">Contact Us</a></li>
-                    <li><a href="#">Feature</a></li>
+                    <li><a href="index.php" target="_blank">Home Blog</a></li>
+                    <li><a href="about.php" target="_blank">About School</a></li>
+                    <li><a href="gallery.php?Page=1" target="_blank">Gallery</a></li>
+                    <li><a href="blog.php?Page=1" target="_blank">News</a></li>
+                    <li><a href="kontak.php" target="_blank">Address</a></li>                    
                 </ul>
-                <form action="blog.php?Page=1" class="navbar-form navbar-right">
+                <!-- <form action="blog.php?Page=1" class="navbar-form navbar-right">
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Search" name="search">
                     </div>
                     <button class="btn btn-default" name="searchButton">Go</button>
-                </form>
+                </form> -->
             </div>
         </div>
     </nav>
@@ -104,11 +141,11 @@ if (isset($_POST["Submit"])) {
     <!-- CONTAINER area -->
     <div class="container-fluid">
         <div class="row">
-            <!--SIDE area-->
+            <!-- LEFT area -->
             <div class="col-sm-2">
                 <br>
                 <ul id="side_menu" class="nav nav-pills nav-stacked">
-                    <li><a href="dashboard.php"> <span class="glyphicon glyphicon-th"></span>
+                    <li><a href="dashboard.php?Page=1"> <span class="glyphicon glyphicon-th"></span>
                             &nbsp;Dashboard</a></li>
                     <li><a href="addnewpost.php"><span class="glyphicon glyphicon-list-alt"></span>
                             &nbsp;Add New Post</a></li>
@@ -120,11 +157,11 @@ if (isset($_POST["Submit"])) {
                             &nbsp;Manage Beranda</a></li>
                     <li><a href="dashTentang.php"><span class="glyphicon glyphicon-list-alt"></span>
                             &nbsp;Tentang Sekolah</a></li>
-                    <li class="active"><a href="manageGaleri.php"> <span class="glyphicon glyphicon-picture"></span>
+                    <li class="active"><a href="manageGaleri.php?Page=1"> <span class="glyphicon glyphicon-picture"></span>
                             &nbsp;Manage Galeri</a></li>
                     <li><a href="manageKontak.php"><span class="glyphicon glyphicon-road"></span>
                             &nbsp;Manage Address</a></li>
-                    <li><a href="comments.php"><span class="glyphicon glyphicon-comment"></span>
+                    <li><a href="comments.php?Page=1"><span class="glyphicon glyphicon-comment"></span>
                             &nbsp;Comments
 
                             <?php
@@ -140,15 +177,15 @@ if (isset($_POST["Submit"])) {
                             <?php } ?>
 
                         </a></li>
-                    <li><a href="blog.php?Page=1" target="_blank"><span class="glyphicon glyphicon-equalizer"></span>
-                            &nbsp;Live Blog</a></li>
+                    <!-- <li><a href="blog.php?Page=1" target="_blank"><span class="glyphicon glyphicon-equalizer"></span>
+                            &nbsp;Live Blog</a></li> -->
                     <li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span>
                             &nbsp;Logout</a></li>
                 </ul>
             </div>
-            <!--End of SIDE area-->
+            <!-- End of LEFT area -->
 
-            <!--MAIN area-->
+            <!-- RIGHT area-->
             <div class="col-sm-10">
                 <!-- MESSAGE area -->
                 <div>
@@ -157,10 +194,11 @@ if (isset($_POST["Submit"])) {
                     ?>
                 </div>
                 <!-- End of MESSAGE area -->
+
                 <h1>Manage Galeri</h1>
                 <!-- ADD NEW PHOTO area -->
                 <div>
-                    <form action="manageGaleri.php" method="post" enctype="multipart/form-data">
+                    <form action="manageGaleri.php?Page=1" method="post" enctype="multipart/form-data">
                         <fieldset>
                             <div class="form-group">
                                 <label for="title"><span class="Fieldinfo">Title:</span></label>
@@ -199,19 +237,30 @@ if (isset($_POST["Submit"])) {
                         </tr>
 
                         <?php
-                        $viewQuery = $Connection->query("SELECT * FROM galeri ORDER BY id desc");
-                        $SrNo = 0;
+                        if (isset($_GET["Page"])) {
+                            $Page = $_GET["Page"];
+                            if ($Page < 1) {
+                                $ShowPostFrom = 0;
+                            } else {
+                                $ShowPostFrom = ($Page * 8) - 8;
+                                //echo $ShowPostFrom;
+                            }
+                            $viewQuery = $Connection->query("SELECT * FROM galeri ORDER BY id desc LIMIT $ShowPostFrom,8");              
+                        } else {
+                            $viewQuery = $Connection->query("SELECT * FROM galeri ORDER BY id desc LIMIT 0,8");
+                        }
+                        $SrNo = 1;
                         while ($fetchData = mysqli_fetch_array($viewQuery)) {
                             $Id = $fetchData["id"];
                             $DateTime = $fetchData["datetime"];
                             $Image = $fetchData["image"];
                             $Title = $fetchData["title"];
                             $Admin = $fetchData["author"];
-                            $SrNo++;
+                            $SrNoPage = $ShowPostFrom + $SrNo++;
 
                             ?>
                         <tr>
-                            <td><?php echo $SrNo; ?></td>
+                            <td><?php echo $SrNoPage; ?></td>
                             <td style="color: #5e5eff;">
                                 <?php
                                     if (strlen($Title) > 50) {
@@ -246,9 +295,57 @@ if (isset($_POST["Submit"])) {
                         <?php } ?>
                     </table>
                 </div>
-                <!--End of GALERI Area-->
+                <!-- PAGINATION AREA -->
+                <div class="paginationS">
+                    <div class="page">
+                        <!-- Creating Backward Button -->
+                        <?php
+                        if (isset($Page)) {
+                            if ($Page > 1) {
+                                ?>
+                                <a href="manageGaleri.php?Page=<?php echo $Page - 1; ?>" class="pagination"> &laquo; </a>
+                            <?php
+                            }
+                        } ?>
+                        <!-- End Backward Button area -->
+                        <?php
+                        $queryPagination = $Connection->query("SELECT COUNT(*) FROM galeri");
+                        $rowsPagination = mysqli_fetch_array($queryPagination);
+                        $totalPosts = array_shift($rowsPagination);
+                        //echo $totalPosts;
+                        $postPagination = $totalPosts / 8;
+                        $postPagination = ceil($postPagination);
+                        //echo $postPagination;
+
+                        for ($i = 1; $i <= $postPagination; $i++) {
+                            if (isset($Page)) {
+                                if ($i == $Page) {
+                                    ?>
+                                    <a href="manageGaleri.php?Page=<?php echo $i; ?>" class="pagination aktif"><?php echo $i; ?></a>
+                                <?php
+                                } else {
+                                    ?>
+                                    <a href="manageGaleri.php?Page=<?php echo $i; ?>" class="pagination"><?php echo $i; ?></a>
+                                <?php   }
+                            }
+                        } ?>
+                        <!-- Creating Forward Button -->
+                        <?php
+                        if (isset($Page)) {
+                            if ($Page + 1 <= $postPagination) {
+                                ?>
+                                <a href="manageGaleri.php?Page=<?php echo $Page + 1; ?>" class="pagination"> &raquo; </a>
+                            <?php
+                            }
+                        } ?>
+                        <!-- End Forward Button area -->
+                    </div>          
+                </div><br>
+                <!-- END OF PAGINATION AREA -->
+                </div>                
+                <!-- End of GALERI Area -->
             </div>
-            <!--End of MAIN area-->
+            <!-- End of RIGHT area -->
         </div>
     </div>
     <!-- end of CONTAINER area -->
@@ -258,5 +355,6 @@ if (isset($_POST["Submit"])) {
     </footer>
 
 </body>
+<!-- END OF BODY AREA -->
 
 </html>
