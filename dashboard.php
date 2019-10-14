@@ -16,12 +16,47 @@
 
     <link rel="stylesheet" href="css/adminstyles.css?v=<?php echo time(); ?>" />
 
-    <!-- <script src="js/jQuery3.4.1.js"></script> -->
+    <link rel="icon" href="dist/img/smkn8bone_logo.png" type="image/gif" sizes="16x16" />
 
-    <!-- <script src="js/bootstrap.min.js"></script> -->
+    <script src="js/jQuery3.4.1.js"></script>
+
+    <script src="js/bootstrap.min.js"></script>
 
     <title>Dashboard</title>
 </head>
+
+<style>
+    .paginationS {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        padding-top: 10px;
+    }
+
+    .page {
+        grid-column: 1;
+        justify-self: center;
+    }
+
+    .pagination {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    border: 1px solid #ddd;
+    margin: 0 4px;
+    }
+
+    .aktif {
+    background-color: #1f70cc;
+    color: white;
+    border: 1px solid #1f70cc;
+    }
+
+    .pagination:hover:not(.aktif) {
+    background-color: #ddd;
+    }
+</style>
 
 <body>
     <div id="head-background1">
@@ -106,13 +141,18 @@
                 </ul>
             </div>
             <!--Ending of Side Area-->
-            <div class="col-sm-10">
-                <!--Main Area-->
+
+            <!--Main Area-->
+            <div class="col-sm-10"> 
+                <!-- Pop Up Message Area -->
                 <div>
                     <?php echo Message();
                     echo SuccessMessage();
                     ?>
                 </div>
+                <!-- End Pop Up Message Area -->
+
+                <!-- Dashboard Area -->
                 <h1>Admin Dashboard</h1>
                 <div class="table-responsive">
                     <table class="table table-striped table-hover">
@@ -129,8 +169,20 @@
                         </tr>
 
                         <?php
-                        $viewQuery = $Connection->query("SELECT * FROM admin_panel ORDER BY id desc");
-                        $SrNo = 0;
+
+                        if (isset($_GET["Page"])) {
+                            $Page = $_GET["Page"];
+                            if ($Page < 1) {
+                                $ShowPostFrom = 0;
+                            } else {
+                                $ShowPostFrom = ($Page * 20) - 20;
+                                //echo $ShowPostFrom;
+                            }
+                            $viewQuery = $Connection->query("SELECT * FROM admin_panel ORDER BY id desc LIMIT $ShowPostFrom,20");              
+                        } else {
+                            $viewQuery = $Connection->query("SELECT * FROM admin_panel ORDER BY id desc LIMIT 0,20");
+                        }                        
+                        $SrNo = 1;
                         while ($fetchData = mysqli_fetch_array($viewQuery)) {
                             $Id = $fetchData["id"];
                             $DateTime = $fetchData["datetime"];
@@ -139,11 +191,11 @@
                             $Admin = $fetchData["author"];
                             $Image = $fetchData["image"];
                             $Post = $fetchData["post"];
-                            $SrNo++;
+                            $SrNoPage = $ShowPostFrom + $SrNo++;
 
                             ?>
                         <tr>
-                            <td><?php echo $SrNo; ?></td>
+                            <td><?php echo $SrNoPage; ?></td>
                             <td style="color: #5e5eff;">
                                 <?php
                                     if (strlen($Title) > 50) {
@@ -209,18 +261,69 @@
                             <!-- <td><?php echo $Post; ?></td> -->
                         </tr>
                         <?php } ?>
-
-
                     </table>
+                    
+                    <!-- PAGINATION AREA -->
+                <div class="paginationS">
+                    <div class="page">
+                        <!-- Creating Backward Button -->
+                        <?php
+                        if (isset($Page)) {
+                            if ($Page > 1) {
+                                ?>
+                                <a href="dashboard.php?Page=<?php echo $Page - 1; ?>" class="pagination"> &laquo; </a>
+                            <?php
+                            }
+                        } ?>
+                        <!-- End Backward Button area -->
+                        <?php
+                        $queryPagination = $Connection->query("SELECT COUNT(*) FROM admin_panel");
+                        $rowsPagination = mysqli_fetch_array($queryPagination);
+                        $totalPosts = array_shift($rowsPagination);
+                        //echo $totalPosts;
+                        $postPagination = $totalPosts / 20;
+                        $postPagination = ceil($postPagination);
+                        //echo $postPagination;
+
+                        for ($i = 1; $i <= $postPagination; $i++) {
+                            if (isset($Page)) {
+                                if ($i == $Page) {
+                                    ?>
+                                    <a href="dashboard.php?Page=<?php echo $i; ?>" class="pagination aktif"><?php echo $i; ?></a>
+                                <?php
+                                } else {
+                                    ?>
+                                    <a href="dashboard.php?Page=<?php echo $i; ?>" class="pagination"><?php echo $i; ?></a>
+                                <?php   }
+                            }
+                        } ?>
+                        <!-- Creating Forward Button -->
+                        <?php
+                        if (isset($Page)) {
+                            if ($Page + 1 <= $postPagination) {
+                                ?>
+                                <a href="dashboard.php?Page=<?php echo $Page + 1; ?>" class="pagination"> &raquo; </a>
+                            <?php
+                            }
+                        } ?>
+                        <!-- End Forward Button area -->
+                    </div>          
+                </div><br>
+                <!-- END OF PAGINATION AREA -->
+
                 </div>
+                <!-- End of Dashboard Area -->
+                
             </div>
-            <!--Ending of Main Area-->
+            <!--End of Main Area-->
         </div>
     </div>
 
     <footer id="main-footer">
         Copyright &copy; 2019 SMKN 8 Bone
     </footer>
+
+    <script src="dist/js/main.js?v=<?php echo time(); ?>"></script>
 
 </body>
 

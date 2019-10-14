@@ -42,7 +42,7 @@ if (isset($_POST["Submit"])) {
 <!-- end of SUBMIT BUTTON configuration -->
 <!DOCTYPE html>
 <html lang="en">
-
+<!-- Head Area -->
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -53,6 +53,7 @@ if (isset($_POST["Submit"])) {
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 
     <link rel="stylesheet" href="css/adminstyles.css?v=<?php echo time(); ?>" />
+    <link rel="icon" href="dist/img/smkn8bone_logo.png" type="image/gif" sizes="16x16" />
 
     <!-- <script src="js/jQuery3.4.1.js"></script> -->
 
@@ -60,7 +61,7 @@ if (isset($_POST["Submit"])) {
 
     <title>Manage Galeri</title>
 </head>
-
+<!--End of Head Area -->
 <body>
     <!-- NAVBAR area -->
     <div id="head-background1">
