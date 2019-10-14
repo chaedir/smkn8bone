@@ -1,7 +1,7 @@
 <?php require_once("include/session.php"); ?>
 <?php require_once("include/functions.php"); ?>
 <?php require_once("include/db.php"); ?>
-<?php Confirm_Login(); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -128,7 +128,7 @@
                 <?php
                 //mysqli_query($Connection, "SELECT * FROM category");
                 global $Connection;
-                $getProduct = $Connection->query("SELECT * FROM admin_panel ORDER BY datetime desc LIMIT 0,5");
+                $getProduct = $Connection->query("SELECT * FROM admin_panel ORDER BY id desc LIMIT 0,5");
                 //$SrNo = 0;
                 while ($dataRows = mysqli_fetch_array($getProduct)) {
                     $Id = $dataRows["id"];
@@ -143,7 +143,14 @@
                     <div class="rcPost">
                         <div class="desc-rcPost">
                             <a href="fullPost.php?id=<?php echo $Id; ?> " target=" _blank">
-                                <p id="sideHeading"><?php echo htmlentities($Title); ?></p>
+                                <p id="sideHeading">
+                                    <?php
+                                        if (strlen($Title) > 50) {
+                                            $Title = substr($Title, 0, 50) . '..';
+                                        }
+                                        echo htmlentities($Title);
+                                        ?>
+                                </p>
                             </a>
                             <!-- <p class="description" style="margin-left: 90px;"><?php echo htmlentities($DateTime); ?></p> -->
                         </div>

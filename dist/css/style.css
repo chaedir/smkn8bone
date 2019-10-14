@@ -105,7 +105,7 @@ img {
 #sideHeading {
   background: #1f70cc;
   color: #fff;
-  padding: 0.8em;
+  padding: 0.73em 0.5em 0.73em 1em;
   font-size: 1rem;
   text-decoration: none;
   border-radius: 50px 0 0 50px;
@@ -114,6 +114,7 @@ img {
 
 #sideHeading:hover {
   background: #717171;
+  margin-right: 0.5em;
   margin-left: -0.5em;
 }
 

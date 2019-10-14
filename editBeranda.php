@@ -77,10 +77,14 @@ if (isset($_POST["Submit"])) {
                             &nbsp;Categories</a></li>
                     <li><a href="manageadmin.php"><span class="glyphicon glyphicon-user"></span>
                             &nbsp;Manage Admin</a></li>
-                    <li><a href="dashBeranda.php"> <span class="glyphicon glyphicon-home"></span>
+                    <li class="active"><a href="dashBeranda.php"> <span class="glyphicon glyphicon-home"></span>
                             &nbsp;Manage Beranda</a></li>
                     <li><a href="dashTentang.php"><span class="glyphicon glyphicon-list-alt"></span>
                             &nbsp;Tentang Sekolah</a></li>
+                    <li><a href="manageGaleri.php"> <span class="glyphicon glyphicon-picture"></span>
+                            &nbsp;Manage Galeri</a></li>
+                    <li><a href="manageKontak.php"><span class="glyphicon glyphicon-road"></span>
+                            &nbsp;Manage Address</a></li>
                     <li><a href="comments.php"><span class="glyphicon glyphicon-comment"></span>
                             &nbsp;Comments
 

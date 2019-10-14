@@ -18,7 +18,7 @@
 
     <link rel="stylesheet" href="css/blogstyle.css?v=<?php echo time(); ?>" />
 
-    <link rel="icon" href="/dist/img/smkn8bone_logo.png" type="image/gif" sizes="16x16" />
+    <link rel="icon" href="dist/img/smkn8bone_logo.png" type="image/gif" sizes="16x16" />
 
     <script src="js/jQuery3.4.1.js"></script>
 
