@@ -8,10 +8,10 @@ if (isset($_GET["delete"])) {
     $Query = mysqli_query($Connection, "DELETE FROM galeri WHERE id='" . $IdFromURL . "'");
     if ($Query) {
         $_SESSION["SuccessMessage"] = "Photo Deleted Successfully";
-        Redirect_to("manageGaleri.php");
+        Redirect_to("manageGaleri.php?Page=1");
     } else {
         $_SESSION["ErrorMessage"] = "Something went wrong, try again !";
-        Redirect_to("manageGaleri.php");
+        Redirect_to("manageGaleri.php?Page=1");
     }
 }
 ?>

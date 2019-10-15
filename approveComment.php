@@ -9,10 +9,10 @@ if (isset($_GET["id"])) {
     $Query = mysqli_query($Connection, "UPDATE comments SET status='" . ON . "', approvedby='" . $Admin . "' WHERE id='" . $IdFromURL . "'");
     if ($Query) {
         $_SESSION["SuccessMessage"] = "Comment Approved Successfully";
-        Redirect_to("comments.php");
+        Redirect_to("comments.php?Page=1");
     } else {
         $_SESSION["ErrorMessage"] = "Something went wrong, try again !";
-        Redirect_to("comments.php");
+        Redirect_to("comments.php?Page=1");
     }
 }
 ?>

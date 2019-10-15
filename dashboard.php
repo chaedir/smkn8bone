@@ -169,7 +169,6 @@
                         </tr>
 
                         <?php
-
                         if (isset($_GET["Page"])) {
                             $Page = $_GET["Page"];
                             if ($Page < 1) {
@@ -192,7 +191,6 @@
                             $Image = $fetchData["image"];
                             $Post = $fetchData["post"];
                             $SrNoPage = $ShowPostFrom + $SrNo++;
-
                             ?>
                         <tr>
                             <td><?php echo $SrNoPage; ?></td>
