@@ -38,7 +38,7 @@ if (isset($_POST["Submit"])) {
 <!-- end of SUBMIT BUTTON configuration -->
 <!DOCTYPE html>
 <html lang="en">
-
+<!-- Head Area -->
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -56,15 +56,55 @@ if (isset($_POST["Submit"])) {
 
     <title>Edit Address</title>
 </head>
+<!-- End Of Head Area -->
 
+<!-- Body Area -->
 <body>
+    <!-- NAVBAR AREA -->
+    <div id="head-background1">
+    </div>
+    <nav class="navbar navbar-inverse" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse">
+                    <span class="sr-only">Toggle Navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="blog.php?Page=1" class="navbar-brand">
+                    <img id="logo" src="images/smkn8bone_logo.png">
+                </a>
+            </div>
+            <div class="collapse navbar-collapse" id="collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="index.php" target="_blank">Home Blog</a></li>
+                    <li><a href="about.php" target="_blank">About School</a></li>
+                    <li><a href="gallery.php?Page=1" target="_blank">Gallery</a></li>
+                    <li><a href="blog.php?Page=1" target="_blank">News</a></li>
+                    <li><a href="kontak.php" target="_blank">Address</a></li>                    
+                </ul>
+                <!-- <form action="blog.php?Page=1" class="navbar-form navbar-right">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search" name="search">
+                    </div>
+                    <button class="btn btn-default" name="searchButton">Go</button>
+                </form> -->
+            </div>
+        </div>
+    </nav>
+    <div id="head-background2">
+    </div>
+    <!-- END OF NAVBAR AREA -->
+
+    <!-- Main Area -->
     <div class="container-fluid">
         <div class="row">
-            <!--SIDE area-->
+            <!-- Left area-->
             <div class="col-sm-2">
                 <br>
                 <ul id="side_menu" class="nav nav-pills nav-stacked">
-                    <li><a href="dashboard.php"> <span class="glyphicon glyphicon-th"></span>
+                    <li><a href="dashboard.php?Page=1"> <span class="glyphicon glyphicon-th"></span>
                             &nbsp;Dashboard</a></li>
                     <li><a href="addnewpost.php"><span class="glyphicon glyphicon-list-alt"></span>
                             &nbsp;Add New Post</a></li>
@@ -76,11 +116,11 @@ if (isset($_POST["Submit"])) {
                             &nbsp;Manage Beranda</a></li>
                     <li><a href="dashTentang.php"><span class="glyphicon glyphicon-list-alt"></span>
                             &nbsp;Tentang Sekolah</a></li>
-                    <li><a href="manageGaleri.php"> <span class="glyphicon glyphicon-picture"></span>
+                    <li><a href="manageGaleri.php?Page=1"> <span class="glyphicon glyphicon-picture"></span>
                             &nbsp;Manage Galeri</a></li>
                     <li class="active"><a href="manageKontak.php"><span class="glyphicon glyphicon-road"></span>
                             &nbsp;Manage Address</a></li>
-                    <li><a href="comments.php"><span class="glyphicon glyphicon-comment"></span>
+                    <li><a href="comments.php?Page=1"><span class="glyphicon glyphicon-comment"></span>
                             &nbsp;Comments
 
                             <?php
@@ -96,13 +136,15 @@ if (isset($_POST["Submit"])) {
                             <?php } ?>
 
                         </a></li>
-                    <li><a href="blog.php?Page=1" target="_blank"><span class="glyphicon glyphicon-equalizer"></span>
-                            &nbsp;Live Blog</a></li>
+                    <!-- <li><a href="blog.php?Page=1" target="_blank"><span class="glyphicon glyphicon-equalizer"></span>
+                            &nbsp;Live Blog</a></li> -->
                     <li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span>
                             &nbsp;Logout</a></li>
                 </ul>
             </div>
-            <!--end of SIDE area-->
+            <!--end of Left area-->
+
+            <!-- Right Area -->
             <div class="col-sm-10">
                 <h1>Update Address</h1>
                 <!-- MESSAGE area -->
@@ -124,7 +166,6 @@ if (isset($_POST["Submit"])) {
                         $Admin = $fetchData["author"];
                         $Kontak1 = $fetchData["kontak1"];
                         $Kontak2 = $fetchData["kontak2"];
-
                         ?>
 
                     <form action="editKontak.php?edit=<?php echo $EditIDFromURL; ?>" method="post" enctype="multipart/form-data">
@@ -148,14 +189,16 @@ if (isset($_POST["Submit"])) {
                 </div>
                 <!--end of EDIT area -->
             </div>
+            <!-- End Of Right Area -->
         </div>
     </div>
-    </div>
+    <!-- End Of Main Area -->
 
+    <!-- Footer Area -->
     <footer id="main-footer">
         Copyright &copy; 2019 SMKN 8 Bone
     </footer>
-
+    <!-- End Of Footer Area -->
 </body>
-
+<!-- End Of Body Area -->
 </html>
