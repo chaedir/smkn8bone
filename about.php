@@ -1,7 +1,6 @@
-<?php require_once("include/db.php"); ?>
 <?php require_once("include/session.php"); ?>
 <?php require_once("include/functions.php"); ?>
-
+<?php require_once("include/db.php"); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,7 +13,7 @@
 
     <link rel="stylesheet" href="dist/css/main.css?v=<?php echo time(); ?>" />
 
-    <link rel="icon" href="/dist/img/smkn8bone_logo.png" type="image/gif" sizes="16x16" />
+    <link rel="icon" href="dist/img/smkn8bone_logo.png" type="image/gif" sizes="16x16" />
 
     <title>About School</title>
 </head>
@@ -37,22 +36,22 @@
             </div>
             <ul class="menu-nav">
                 <li class="nav-item">
-                    <a href="index.html" class="nav-link">Beranda</a>
+                    <a href="index.php" class="nav-link">Beranda</a>
                 </li>
                 <li class="nav-item current">
-                    <a href="about.html" class="nav-link">Tentang Sekolah</a>
+                    <a href="about.php" class="nav-link">Tentang Sekolah</a>
                 </li>
                 <li class="nav-item">
-                    <a href="work.html" class="nav-link">Galeri</a>
+                    <a href="gallery.php?Page=1" class="nav-link">Galeri</a>
                 </li>
                 <li class="nav-item">
-                    <a href="berita.html" class="nav-link">Berita</a>
+                    <a href="blog.php?Page=1" class="nav-link">Berita</a>
                 </li>
                 <li class="nav-item">
                     <a href="http://epanrita.id/" class="nav-link" target="_blank">ePanrita</a>
                 </li>
                 <li class="nav-item">
-                    <a href="contact.html" class="nav-link">Hubungi Kami</a>
+                    <a href="kontak.php" class="nav-link">Hubungi Kami</a>
                 </li>
             </ul>
         </nav>

@@ -2,7 +2,7 @@
 <?php require_once("include/functions.php"); ?>
 <?php require_once("include/db.php"); ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <!-- HEAD AREA -->
   <head>
     <meta charset="UTF-8" />
@@ -10,13 +10,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
     <!-- <link rel="stylesheet" href="css/bootstrap.min.css" /> -->
-    <link rel="stylesheet" href="dist/css/main.css?v=<?php echo time(); ?>" />
+    
 
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" /> -->
-
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous" />
     <link rel="stylesheet" href="css/publicstyle.css?v=<?php echo time(); ?>" />
-
     <link rel="stylesheet" href="css/blogstyle.css?v=<?php echo time(); ?>" />
+    <link rel="stylesheet" href="dist/css/main.css?v=<?php echo time(); ?>" />
 
     <link rel="icon" href="dist/img/smkn8bone_logo.png" type="image/gif" sizes="16x16" />
 
@@ -24,7 +24,7 @@
 
     <script src="js/bootstrap.min.js"></script>
 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous" />
+    
 
     <title>Gallery Page</title>
   </head>
@@ -33,7 +33,7 @@
   <!-- STYLE AREA -->
   <style>
     body {
-      font-family: Verdana, sans-serif;
+      /* font-family: Verdana, sans-serif; */
       margin: 0;
     }
 
@@ -41,8 +41,14 @@
       box-sizing: border-box;
     }
 
-    .row > .column {
-      padding: 8px 8px;
+    .row {
+    display: flex;
+    flex-wrap: wrap;
+    /* padding: 0 4px; */
+  }
+
+    .row > .column {      
+      padding: 8px 8px;      
     }
 
     .row:after {
@@ -53,9 +59,11 @@
 
     .column {
       position: relative;
-      float: left;      
-      width: 25%;
-      overflow: hidden;
+      flex: 25%;
+      max-width: 25%;  
+      /* float: left;       */
+      /* width: 25%; */
+      /* overflow: hidden; */
     }
 
     .column img {
@@ -108,7 +116,7 @@
     }    
 
     /* The Close Button */
-    .close {      
+    .closeGlry {      
       position: absolute;
       top: 50px;
       right: 0;
@@ -122,8 +130,8 @@
       background-color: rgba(0, 0, 0, 0.4);
     }
 
-    .close:hover,
-    .close:focus {
+    .closeGlry:hover,
+    .closeGlry:focus {
       background-color: rgba(0, 0, 0, 0.8);
       text-decoration: none;
       cursor: pointer;
@@ -223,6 +231,22 @@
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
         0 6px 20px 0 rgba(0, 0, 0, 0.19);
     }
+
+    /* Responsive layout - makes a two column-layout instead of four columns */
+    @media screen and (max-width: 800px) {
+      .column {
+        flex: 50%;
+        max-width: 50%;
+      }
+    }
+
+    /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+    @media screen and (max-width: 600px) {
+      .column {
+        flex: 100%;
+        max-width: 100%;
+      }
+    }
   </style>
   <!-- END OF STYLE AREA -->
 
@@ -240,26 +264,24 @@
             <div class="portrait"></div>
           </div>
           <ul class="menu-nav">
-            <li class="nav-item">
-              <a href="index.html" class="nav-link">Beranda</a>
-            </li>
-            <li class="nav-item">
-              <a href="about.html" class="nav-link">Tentang Sekolah</a>
-            </li>
-            <li class="nav-item">
-              <a href="work.html" class="nav-link">Galeri</a>
-            </li>
-            <li class="nav-item">
-              <a href="berita.html" class="nav-link">Berita</a>
-            </li>
-            <li class="nav-item">
-              <a href="http://epanrita.id/" class="nav-link" target="_blank"
-                >ePanrita</a
-              >
-            </li>
-            <li class="nav-item current">
-              <a href="contact.html" class="nav-link">Hubungi Kami</a>
-            </li>
+                <li class="nav-item">
+                    <a href="index.php" class="nav-link">Beranda</a>
+                </li>
+                <li class="nav-item">
+                    <a href="about.php" class="nav-link">Tentang Sekolah</a>
+                </li>
+                <li class="nav-item current">
+                    <a href="gallery.php?Page=1" class="nav-link">Galeri</a>
+                </li>
+                <li class="nav-item">
+                    <a href="blog.php?Page=1" class="nav-link">Berita</a>
+                </li>
+                <li class="nav-item">
+                    <a href="http://epanrita.id/" class="nav-link" target="_blank">ePanrita</a>
+                </li>
+                <li class="nav-item">
+                    <a href="kontak.php" class="nav-link">Hubungi Kami</a>
+                </li>
           </ul>
         </nav>
     </header>
@@ -394,7 +416,7 @@
                 <div class="imageDescription"><?php echo $Description; ?></div> 
               </div>            
           <?php } ?>
-              <span class="close cursor" onclick="closeModal()">&times;</span>
+              <span class="closeGlry cursor" onclick="closeModal()">&times;</span>
               <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
               <a class="next" onclick="plusSlides(1)">&#10095;</a>              
           

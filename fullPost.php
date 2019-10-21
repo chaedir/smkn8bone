@@ -47,7 +47,7 @@ if (isset($_POST["Submit"])) {
 
     <link rel="stylesheet" href="css/blogstyle.css?v=<?php echo time(); ?>" />
 
-    <link rel="icon" href="/dist/img/smkn8bone_logo.png" type="image/gif" sizes="16x16" />
+    <link rel="icon" href="dist/img/smkn8bone_logo.png" type="image/gif" sizes="16x16" />
 
     <script src="js/jQuery3.4.1.js"></script>
 
@@ -82,23 +82,23 @@ if (isset($_POST["Submit"])) {
                 <div class="portrait text-center"></div>
             </div>
             <ul class="menu-nav">
+                <li class="nav-item">
+                    <a href="index.php" class="nav-link">Beranda</a>
+                </li>
+                <li class="nav-item">
+                    <a href="about.php" class="nav-link">Tentang Sekolah</a>
+                </li>
+                <li class="nav-item">
+                    <a href="gallery.php?Page=1" class="nav-link">Galeri</a>
+                </li>
                 <li class="nav-item current">
-                    <a href="index.html" class="nav-link">Beranda</a>
-                </li>
-                <li class="nav-item">
-                    <a href="about.html" class="nav-link">Tentang Sekolah</a>
-                </li>
-                <li class="nav-item">
-                    <a href="work.html" class="nav-link">Galeri</a>
-                </li>
-                <li class="nav-item">
-                    <a href="berita.html" class="nav-link">Berita</a>
+                    <a href="blog.php?Page=1" class="nav-link">Berita</a>
                 </li>
                 <li class="nav-item">
                     <a href="http://epanrita.id/" class="nav-link" target="_blank">ePanrita</a>
                 </li>
                 <li class="nav-item">
-                    <a href="contact.html" class="nav-link">Hubungi Kami</a>
+                    <a href="kontak.php" class="nav-link">Hubungi Kami</a>
                 </li>
             </ul>
         </nav>

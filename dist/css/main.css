@@ -396,6 +396,29 @@ main#home .container3 {
   .projects {
     grid-template-columns: repeat(3, 1fr);
   }
+  main#home .container2 {
+    align-self: center;
+    grid-column: 1/5;
+    grid-row: 2/3;
+    border-radius: 10px;
+    border: #1f70cc 1px solid;
+    margin-top: -0.7em;
+    /* box-shadow: 0 4px 8px 0 rgba(31, 112, 204, 0.5),
+      0 6px 20px 0 rgba(31, 112, 204, 0.49); */
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 50vh;
+  }
+  main#home .container3 {
+    display: none;
+  }
+  .mySlides img {
+    display: block;
+    height: 50vh;
+    width: 100%;
+    object-fit: cover;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -440,6 +463,29 @@ main#home .container3 {
   .projects {
     grid-template-columns: repeat(2, 1fr);
   }
+  main#home .container2 {
+    align-self: center;
+    grid-column: 1/5;
+    grid-row: 2/3;
+    border-radius: 10px;
+    border: #1f70cc 1px solid;
+    margin-top: -0.7em;
+    /* box-shadow: 0 4px 8px 0 rgba(31, 112, 204, 0.5),
+      0 6px 20px 0 rgba(31, 112, 204, 0.49); */
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 50vh;
+  }
+  main#home .container3 {
+    display: none;
+  }
+  .mySlides img {
+    display: block;
+    height: 50vh;
+    width: 100%;
+    object-fit: cover;
+  }
 }
 
 @media screen and (max-width: 500px) {
@@ -457,7 +503,7 @@ main#home .container3 {
     bottom: 0;
     left: 0;
     right: 0;
-    height: 200%;
+    height: 100%;
     width: 100%;
     z-index: -1;
     display: block;
@@ -490,7 +536,7 @@ main#home .container3 {
     bottom: 0;
     left: 0;
     right: 0;
-    height: 200%;
+    height: 100%;
     width: 100%;
     z-index: -1;
     display: block;

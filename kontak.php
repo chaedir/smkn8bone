@@ -1,6 +1,6 @@
-<?php require_once("include/db.php"); ?>
 <?php require_once("include/session.php"); ?>
 <?php require_once("include/functions.php"); ?>
+<?php require_once("include/db.php"); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -36,26 +36,24 @@
           <div class="portrait"></div>
         </div>
         <ul class="menu-nav">
-          <li class="nav-item">
-            <a href="index.html" class="nav-link">Beranda</a>
-          </li>
-          <li class="nav-item">
-            <a href="about.html" class="nav-link">Tentang Sekolah</a>
-          </li>
-          <li class="nav-item">
-            <a href="work.html" class="nav-link">Galeri</a>
-          </li>
-          <li class="nav-item">
-            <a href="berita.html" class="nav-link">Berita</a>
-          </li>
-          <li class="nav-item">
-            <a href="http://epanrita.id/" class="nav-link" target="_blank"
-              >ePanrita</a
-            >
-          </li>
-          <li class="nav-item current">
-            <a href="contact.html" class="nav-link">Hubungi Kami</a>
-          </li>
+                <li class="nav-item">
+                    <a href="index.php" class="nav-link">Beranda</a>
+                </li>
+                <li class="nav-item">
+                    <a href="about.php" class="nav-link">Tentang Sekolah</a>
+                </li>
+                <li class="nav-item">
+                    <a href="gallery.php?Page=1" class="nav-link">Galeri</a>
+                </li>
+                <li class="nav-item">
+                    <a href="blog.php?Page=1" class="nav-link">Berita</a>
+                </li>
+                <li class="nav-item">
+                    <a href="http://epanrita.id/" class="nav-link" target="_blank">ePanrita</a>
+                </li>
+                <li class="nav-item current">
+                    <a href="kontak.php" class="nav-link">Hubungi Kami</a>
+                </li>
         </ul>
       </nav>
     </header>

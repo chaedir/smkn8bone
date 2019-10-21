@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="dist/css/style.css?v=<?php echo time(); ?>" />
     <!-- <link rel="stylesheet" href="css/publicstyle.css?v=<?php echo time(); ?>" /> -->
 
-    <link rel="icon" href="/dist/img/smkn8bone_logo.png" type="image/gif" sizes="16x16" />
+    <link rel="icon" href="dist/img/smkn8bone_logo.png" type="image/gif" sizes="16x16" />
 
     <title>Welcome To SMKN 8 Website</title>
 </head>
@@ -36,22 +36,22 @@
             </div>
             <ul class="menu-nav">
                 <li class="nav-item current">
-                    <a href="index.html" class="nav-link">Beranda</a>
+                    <a href="index.php" class="nav-link">Beranda</a>
                 </li>
                 <li class="nav-item">
-                    <a href="about.html" class="nav-link">Tentang Sekolah</a>
+                    <a href="about.php" class="nav-link">Tentang Sekolah</a>
                 </li>
                 <li class="nav-item">
-                    <a href="work.html" class="nav-link">Galeri</a>
+                    <a href="gallery.php?Page=1" class="nav-link">Galeri</a>
                 </li>
                 <li class="nav-item">
-                    <a href="berita.html" class="nav-link">Berita</a>
+                    <a href="blog.php?Page=1" class="nav-link">Berita</a>
                 </li>
                 <li class="nav-item">
                     <a href="http://epanrita.id/" class="nav-link" target="_blank">ePanrita</a>
                 </li>
                 <li class="nav-item">
-                    <a href="contact.html" class="nav-link">Hubungi Kami</a>
+                    <a href="kontak.php" class="nav-link">Hubungi Kami</a>
                 </li>
             </ul>
         </nav>
@@ -101,8 +101,9 @@
 
                     ?>
                     <div class="mySlides fade">
-                        <div class="numbertext"></div>
-                        <img src="slideshows/<?php echo $Image; ?>" width="100%" ; height="400px" ;>
+                        <!-- <div class="numbertext"></div> -->
+                        <img src="slideshows/<?php echo $Image; ?>" width="100%" ; height="400px";> 
+                        <!-- height 400px -->
                         <div class="text">
                             <p class="hslide"><?php echo $Title; ?></p>
                             <!-- <p class="pslide">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo nostrum aliquam unde. Esse cumque praesentium sapiente consectetur ipsam sint laudantium ullam nulla iusto vero dicta excepturi libero, possimus magnam fugiat!</p> -->
