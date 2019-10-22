@@ -128,7 +128,7 @@
                         </tr>
 
                         <?php
-                        $viewQuery = $Connection->query("SELECT * FROM tentang_Sekolah");
+                        $viewQuery = $Connection->query("SELECT * FROM tentang_sekolah");
                         while ($fetchData = mysqli_fetch_array($viewQuery)) {
                             $Id = $fetchData["id"];
                             $DateTime = $fetchData["datetime"];

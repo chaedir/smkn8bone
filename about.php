@@ -1,7 +1,6 @@
 <?php require_once("include/session.php"); ?>
 <?php require_once("include/functions.php"); ?>
 <?php require_once("include/db.php"); ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -62,7 +61,7 @@
     <main id="about">
 
         <?php
-        $viewQuery = $Connection->query("SELECT * FROM tentang_Sekolah");
+        $viewQuery = $Connection->query("SELECT * FROM tentang_sekolah");
         while ($fetchData = mysqli_fetch_array($viewQuery)) {
             $Image = $fetchData["image"];
             $p1_title = $fetchData["p1Title"];
